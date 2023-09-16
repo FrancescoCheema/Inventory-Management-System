@@ -37,7 +37,7 @@
             this.ProductsLabel = new System.Windows.Forms.Label();
             this.addbtn = new System.Windows.Forms.Button();
             this.deletebtn = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.modifyparts = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -80,6 +80,7 @@
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(632, 305);
             this.dataGridView1.TabIndex = 3;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
             // IMS
             // 
@@ -146,16 +147,17 @@
             this.deletebtn.Text = "Delete";
             this.deletebtn.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // modifyparts
             // 
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button3.Location = new System.Drawing.Point(517, 487);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(69, 41);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Modify";
-            this.button3.UseVisualStyleBackColor = true;
+            this.modifyparts.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.modifyparts.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.modifyparts.Location = new System.Drawing.Point(517, 487);
+            this.modifyparts.Name = "modifyparts";
+            this.modifyparts.Size = new System.Drawing.Size(69, 41);
+            this.modifyparts.TabIndex = 10;
+            this.modifyparts.Text = "Modify";
+            this.modifyparts.UseVisualStyleBackColor = true;
+            this.modifyparts.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -221,6 +223,7 @@
             this.exitbtn.TabIndex = 16;
             this.exitbtn.Text = "Exit";
             this.exitbtn.UseVisualStyleBackColor = true;
+            this.exitbtn.Click += new System.EventHandler(this.exitbtn_Click);
             // 
             // Form1
             // 
@@ -233,7 +236,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.modifyparts);
             this.Controls.Add(this.deletebtn);
             this.Controls.Add(this.addbtn);
             this.Controls.Add(this.ProductsLabel);
@@ -264,7 +267,7 @@
         private System.Windows.Forms.Label ProductsLabel;
         private System.Windows.Forms.Button addbtn;
         private System.Windows.Forms.Button deletebtn;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button modifyparts;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;

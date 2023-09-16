@@ -15,6 +15,7 @@ namespace Francesco_Cheema___Inventory
         public Form1()
         {
             InitializeComponent();
+            dataGridView1.DataSource = ListClass.MyList;
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -100,6 +101,22 @@ namespace Francesco_Cheema___Inventory
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form Country = new Form();
+            Country.ShowDialog();
+        }
+
+        private void exitbtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
     }
 }
