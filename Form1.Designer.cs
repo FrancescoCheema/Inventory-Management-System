@@ -41,9 +41,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
             this.exitbtn = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -192,27 +192,6 @@
             this.button5.Text = "Add";
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(1009, 74);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(208, 33);
-            this.textBox2.TabIndex = 15;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            // 
-            // button6
-            // 
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button6.Location = new System.Drawing.Point(912, 70);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 35);
-            this.button6.TabIndex = 14;
-            this.button6.Text = "Search";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
             // exitbtn
             // 
             this.exitbtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -225,14 +204,34 @@
             this.exitbtn.UseVisualStyleBackColor = true;
             this.exitbtn.Click += new System.EventHandler(this.exitbtn_Click);
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(1144, 66);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(208, 33);
+            this.textBox2.TabIndex = 18;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged_1);
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.button3.Location = new System.Drawing.Point(1050, 66);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 35);
+            this.button3.TabIndex = 17;
+            this.button3.Text = "Search";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1393, 653);
-            this.Controls.Add(this.exitbtn);
+            this.ClientSize = new System.Drawing.Size(1393, 649);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.exitbtn);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button5);
@@ -271,9 +270,9 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button exitbtn;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
