@@ -123,9 +123,14 @@ namespace Francesco_Cheema___Inventory
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form Country = new Form();
+            Form3 Country = new Form3();
+
+            Country.textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            Country.textBox2.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            Country.textBox3.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            Country.textBox4.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+
             Country.ShowDialog();
-            ModifyPart InstanceModify = new ModifyPart();
         }
 
         private void exitbtn_Click(object sender, EventArgs e)
@@ -139,8 +144,8 @@ namespace Francesco_Cheema___Inventory
 
         private void textBox2_TextChanged_1(object sender, EventArgs e)
         {
-            dataGridView1.ClearSelection();
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 218, 185);
+            dataGridView2.ClearSelection();
+            dataGridView2.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 218, 185);
             bool found = false;
             string searchText = textBox2.Text.Trim();
 
@@ -151,7 +156,7 @@ namespace Francesco_Cheema___Inventory
                     string productName = ProductsList.MyList[i].ProductName.Trim();
                     if (productName.ToUpper().Contains(searchText.ToUpper()))
                     {
-                        dataGridView1.Rows[i].Selected = true;
+                        dataGridView2.Rows[i].Selected = true;
                         found = true;
                     }
                 }
@@ -160,6 +165,11 @@ namespace Francesco_Cheema___Inventory
             {
                 MessageBox.Show("Nothing found.");
             }
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
 
         }
     }
