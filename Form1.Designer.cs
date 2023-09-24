@@ -223,6 +223,7 @@
             this.button3.TabIndex = 17;
             this.button3.Text = "Search";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // Form1
             // 
@@ -258,8 +259,8 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        public System.Windows.Forms.DataGridView dataGridView2;
+        public System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label IMS;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label PartsLabel;
