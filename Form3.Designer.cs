@@ -68,7 +68,6 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "In-House";
             this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(Form3.radioButton1_CheckedChanged);
             // 
             // radioButton2
             // 
@@ -80,7 +79,6 @@
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Outsourced";
             this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(Form3.radioButton2_CheckedChanged);
             // 
             // label2
             // 
@@ -99,7 +97,6 @@
             this.label3.Size = new System.Drawing.Size(51, 20);
             this.label3.TabIndex = 4;
             this.label3.Text = "Name";
-            this.label3.Click += new System.EventHandler(Form3.label3_Click);
             // 
             // label4
             // 
@@ -109,7 +106,6 @@
             this.label4.Size = new System.Drawing.Size(74, 20);
             this.label4.TabIndex = 5;
             this.label4.Text = "Inventory";
-            this.label4.Click += new System.EventHandler(Form3.label4_Click);
             // 
             // label5
             // 
@@ -146,7 +142,6 @@
             this.label8.Size = new System.Drawing.Size(34, 20);
             this.label8.TabIndex = 9;
             this.label8.Text = "Min";
-            this.label8.Click += new System.EventHandler(Form3.label8_Click);
             // 
             // textBox1
             // 
@@ -155,6 +150,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(136, 30);
             this.textBox1.TabIndex = 10;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox2
             // 
@@ -163,6 +159,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(136, 30);
             this.textBox2.TabIndex = 11;
+            this.textBox2.Validating += new System.ComponentModel.CancelEventHandler(this.textBox2_Validating);
             // 
             // textBox3
             // 
@@ -187,6 +184,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(136, 30);
             this.textBox5.TabIndex = 14;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // textBox6
             // 
@@ -212,6 +210,7 @@
             this.button1.TabIndex = 17;
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -221,6 +220,7 @@
             this.button2.TabIndex = 18;
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form3
             // 
@@ -248,7 +248,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form3";
             this.Text = "Modify Part";
-            this.Load += new System.EventHandler(Form3.Form3_Load);
+            this.Load += new System.EventHandler(this.Form3_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,10 +270,10 @@
         public System.Windows.Forms.TextBox textBox2;
         public System.Windows.Forms.TextBox textBox3;
         public System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        public System.Windows.Forms.TextBox textBox5;
+        public System.Windows.Forms.TextBox textBox6;
+        public System.Windows.Forms.TextBox textBox7;
+        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button button2;
     }
 }

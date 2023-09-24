@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Francesco_Cheema___Inventory
@@ -27,6 +21,7 @@ namespace Francesco_Cheema___Inventory
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
 
         }
 
@@ -98,7 +93,14 @@ namespace Francesco_Cheema___Inventory
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Form3 Country = new Form3();
 
+            Country.textBox1.Text = "";
+            Country.textBox2.Text = "";
+            Country.textBox3.Text = "";
+            Country.textBox4.Text = "";
+
+            Country.ShowDialog();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -129,8 +131,31 @@ namespace Francesco_Cheema___Inventory
             Country.textBox2.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
             Country.textBox3.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
             Country.textBox4.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+            Country.textBox1.ReadOnly = true;
+            Country.textBox5.Text = "F&K Autobody";
+            Country.textBox6.Text = "25";
+            Country.textBox7.Text = "20";
+
+            if (ContainsNumeric(textBox2.Text))
+            {
+                MessageBox.Show("String is required");
+                textBox2.BackColor = System.Drawing.Color.IndianRed;
+            }
 
             Country.ShowDialog();
+
+        }
+
+        public bool ContainsNumeric(string input)
+        {
+            foreach (char c in input)
+            {
+                if (char.IsDigit(c))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void exitbtn_Click(object sender, EventArgs e)
