@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Linq;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Francesco_Cheema___Inventory
 {
@@ -93,14 +95,8 @@ namespace Francesco_Cheema___Inventory
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form3 Country = new Form3();
-
-            Country.textBox1.Text = "";
-            Country.textBox2.Text = "";
-            Country.textBox3.Text = "";
-            Country.textBox4.Text = "";
-
-            Country.ShowDialog();
+            Form4 addPart = new Form4();
+            addPart.ShowDialog();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -118,13 +114,21 @@ namespace Francesco_Cheema___Inventory
             dataGridView1.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Yellow;
         }
 
+
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
 
         }
 
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+           
+           
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
+
             Form3 Country = new Form3();
 
             Country.textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
@@ -136,27 +140,21 @@ namespace Francesco_Cheema___Inventory
             Country.textBox6.Text = "25";
             Country.textBox7.Text = "20";
 
-            if (ContainsNumeric(textBox2.Text))
+            int parsedValue;
+
+            if (int.TryParse(textBox2.Text, out parsedValue))
             {
-                MessageBox.Show("String is required");
-                textBox2.BackColor = System.Drawing.Color.IndianRed;
+                textBox2.BackColor = Color.IndianRed;
             }
+            else
+            {
+                textBox2.BackColor = Color.White;
+            }
+           
 
             Country.ShowDialog();
-
         }
 
-        public bool ContainsNumeric(string input)
-        {
-            foreach (char c in input)
-            {
-                if (char.IsDigit(c))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
 
         private void exitbtn_Click(object sender, EventArgs e)
         {
@@ -196,6 +194,35 @@ namespace Francesco_Cheema___Inventory
         private void button3_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void deletebtn_Click(object sender, EventArgs e)
+        {
+
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this row?", "Confirmation", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+
+                    DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+
+                    int partID = Convert.ToInt32(selectedRow.Cells["PartID"].Value);
+
+                    Parts itemToRemove = ListClass.MyList.FirstOrDefault(item => item.PartID == partID);
+                    if (itemToRemove != null)
+                    {
+                        ListClass.MyList.Remove(itemToRemove);
+                    }
+
+                    dataGridView1.DataSource = null;
+                    dataGridView1.DataSource = ListClass.MyList;
+                }
+            }
+            else
+            {
+                MessageBox.Show("No row is selected to delete.");
+            }
         }
     }
 }

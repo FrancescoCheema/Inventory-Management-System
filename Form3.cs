@@ -86,6 +86,10 @@ namespace Francesco_Cheema___Inventory
 
         private void button1_Click(object sender, EventArgs e)
         {
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox6.Text = "";
 
             MessageBox.Show("Changes Saved Successfully.");
 
