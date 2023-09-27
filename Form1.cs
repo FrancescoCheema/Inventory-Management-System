@@ -55,7 +55,10 @@ namespace Francesco_Cheema___Inventory
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridView1.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Yellow;
+            if (dataGridView1_CellContentClick == true)
+            {
+                dataGridView1.SelectedRows = Color.Yellow;
+            }   
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -139,18 +142,6 @@ namespace Francesco_Cheema___Inventory
             Country.textBox5.Text = "F&K Autobody";
             Country.textBox6.Text = "25";
             Country.textBox7.Text = "20";
-
-            int parsedValue;
-
-            if (int.TryParse(textBox2.Text, out parsedValue))
-            {
-                textBox2.BackColor = Color.IndianRed;
-            }
-            else
-            {
-                textBox2.BackColor = Color.White;
-            }
-           
 
             Country.ShowDialog();
         }
