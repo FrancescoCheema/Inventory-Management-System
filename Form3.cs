@@ -17,6 +17,8 @@ namespace Francesco_Cheema___Inventory
         {
         InitializeComponent();
 
+            textBox2.TextChanged += textBox2_TextChanged;
+
         }
 
         public static void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -81,11 +83,23 @@ namespace Francesco_Cheema___Inventory
 
         public void textBox2_TextChanged(object sender, EventArgs e)
         {
+            if(int.TryParse(textBox2.Text, out _))
+            {
+                textBox2.BackColor = System.Drawing.Color.IndianRed;
+            }
+            else
+            {
+                textBox2.BackColor = System.Drawing.Color.White;
+            }
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox6.Text = "";
 
             MessageBox.Show("Changes Saved Successfully.");
 
