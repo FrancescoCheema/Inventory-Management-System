@@ -113,7 +113,7 @@ namespace Francesco_Cheema___Inventory
 
             string s = textBox3.Text;
 
-            if (!s.All(Char.IsLetter))
+            if (s.All(Char.IsLetter))
             {
                 textBox3.BackColor = System.Drawing.Color.IndianRed;
                 toolTip1.SetToolTip(textBox3, "Inventory number is required");
