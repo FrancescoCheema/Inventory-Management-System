@@ -124,5 +124,41 @@ namespace Francesco_Cheema___Inventory
                 textBox3.BackColor = System.Drawing.Color.White;
             }
         }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            ToolTip toolTip1 = new ToolTip();
+
+            string s = textBox4.Text;
+
+            if (s.All(Char.IsLetter))
+            {
+                textBox4.BackColor = System.Drawing.Color.IndianRed;
+                toolTip1.SetToolTip(textBox4, "Price is required");
+                toolTip1.ForeColor = System.Drawing.Color.Gray;
+            }
+            else
+            {
+                textBox4.BackColor = System.Drawing.Color.White;
+            }
+
+        }
+
+        private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if(radioButton1.Checked == true)
+            {
+                label7.Text = "Machine ID";
+            }
+        }
+
+        private void radioButton2_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (radioButton2.Checked == true)
+            {
+                label7.Text = "Company Name";
+            }
+            
+        }
     }
 }
