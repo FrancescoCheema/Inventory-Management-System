@@ -55,10 +55,7 @@ namespace Francesco_Cheema___Inventory
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView1_CellContentClick == true)
-            {
-                dataGridView1.SelectedRows = Color.Yellow;
-            }   
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

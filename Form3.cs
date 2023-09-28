@@ -105,5 +105,24 @@ namespace Francesco_Cheema___Inventory
 
             this.Close();
         }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+            ToolTip toolTip1 = new ToolTip();
+
+            string s = textBox3.Text;
+
+            if (!s.All(Char.IsLetter))
+            {
+                textBox3.BackColor = System.Drawing.Color.IndianRed;
+                toolTip1.SetToolTip(textBox3, "Inventory number is required");
+                toolTip1.ForeColor = System.Drawing.Color.Gray;
+            }
+            else
+            {
+                textBox3.BackColor = System.Drawing.Color.White;
+            }
+        }
     }
 }
