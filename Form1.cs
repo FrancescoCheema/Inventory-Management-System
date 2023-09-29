@@ -12,7 +12,9 @@ namespace Francesco_Cheema___Inventory
         public Form1()
         {
             InitializeComponent();
+
             dataGridView1.DataSource = ListClass.MyList;
+
             dataGridView2.DataSource = ProductsList.MyList;
         }
 
@@ -23,8 +25,7 @@ namespace Francesco_Cheema___Inventory
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-
+            dataGridView1.ClearSelection();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -128,19 +129,22 @@ namespace Francesco_Cheema___Inventory
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
 
-            Form3 Country = new Form3();
+                Form3 Country = new Form3();
 
-            Country.textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            Country.textBox2.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-            Country.textBox3.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-            Country.textBox4.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
-            Country.textBox1.ReadOnly = true;
-            Country.textBox5.Text = "F&K Autobody";
-            Country.textBox6.Text = "25";
-            Country.textBox7.Text = "20";
+                Country.textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                Country.textBox2.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                Country.textBox3.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                Country.textBox4.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+                Country.textBox1.ReadOnly = true;
+                Country.textBox5.Text = "F&K Autobody";
+                Country.textBox6.Text = "25";
+                Country.textBox7.Text = "20";
 
-            Country.ShowDialog();
+                Country.ShowDialog();
+            }
         }
 
 

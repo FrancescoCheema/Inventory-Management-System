@@ -4,10 +4,12 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Francesco_Cheema___Inventory
 {
@@ -81,19 +83,6 @@ namespace Francesco_Cheema___Inventory
 
         }
 
-        public void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            if(int.TryParse(textBox2.Text, out _))
-            {
-                textBox2.BackColor = System.Drawing.Color.IndianRed;
-            }
-            else
-            {
-                textBox2.BackColor = System.Drawing.Color.White;
-            }
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             textBox2.Text = "";
@@ -109,7 +98,7 @@ namespace Francesco_Cheema___Inventory
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
-            ToolTip toolTip1 = new ToolTip();
+            System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
 
             string s = textBox3.Text;
 
@@ -127,7 +116,7 @@ namespace Francesco_Cheema___Inventory
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            ToolTip toolTip1 = new ToolTip();
+            System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
 
             string s = textBox4.Text;
 
@@ -146,7 +135,8 @@ namespace Francesco_Cheema___Inventory
 
         private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
         {
-            if(radioButton1.Checked == true)
+
+            if (radioButton1.Checked == true)
             {
                 label7.Text = "Machine ID";
             }
@@ -159,6 +149,29 @@ namespace Francesco_Cheema___Inventory
                 label7.Text = "Company Name";
             }
             
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            System.Windows.Forms.ToolTip tooltip1 = new System.Windows.Forms.ToolTip();
+
+            string s = textBox2.Text;
+
+            if(string.IsNullOrEmpty(s) || s.All(char.IsDigit))
+            {
+                textBox2.BackColor = System.Drawing.Color.IndianRed;
+                tooltip1.SetToolTip(textBox2, "Name Required");
+                tooltip1.ForeColor = System.Drawing.Color.Gray;
+            }
+            else
+            {
+                textBox2.BackColor = System.Drawing.Color.White;
+            }
+        }
+
+        private void textBox2_TextChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
