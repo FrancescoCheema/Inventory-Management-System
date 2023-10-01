@@ -1,2 +1,2 @@
 # Inventory-Management-System
-Inventory Management System for College Project
+This is the Inventory Management System Project for my college. Learning C# was quite fun and a lot of research had to go through it. However, I do have to say that my past experience with Javascript helped a lot, being able to use functions, if statements, || and && operators, converting toString() and TryParse() from my previous project, came very handy in this project. 
