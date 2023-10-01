@@ -17,6 +17,10 @@ namespace Francesco_Cheema___Inventory
             InitializeComponent();
 
             dataGridView1.DataSource = ListClass.MyList;
+
+            dataGridView2.DataSource = ProductsList.MyList;
+
+            dataGridView2.Rows.Clear();
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -85,6 +89,42 @@ namespace Francesco_Cheema___Inventory
         }
 
         private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            dataGridView1.ClearSelection();
+            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 218, 185);
+            bool found = false;
+            string searchText = textBox7.Text.Trim();
+
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                for (int i = 0; i < ListClass.MyList.Count; i++)
+                {
+                    string partName = ListClass.MyList[i].PartName.Trim();
+                    if (partName.ToUpper().Contains(searchText.ToUpper()))
+                    {
+                        dataGridView1.Rows[i].Selected = true;
+                        found = true;
+                    }
+                }
+            }
+            if (!found)
+            {
+                MessageBox.Show("Nothing found.");
+            }
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

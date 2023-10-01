@@ -252,9 +252,21 @@ namespace Francesco_Cheema___Inventory
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            Form2 form = new Form2();
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
 
-            form.ShowDialog();
+                Form2 form = new Form2();
+
+                form.textBox1.Text = dataGridView2.CurrentRow.Cells[0].Value.ToString();
+
+                form.textBox2.Text = dataGridView2.CurrentRow.Cells[1].Value.ToString();
+
+                form.textBox3.Text = dataGridView2.CurrentRow.Cells[2].Value.ToString();
+
+                form.textBox4.Text = dataGridView2.CurrentRow.Cells[3].Value.ToString();
+
+                form.ShowDialog();
+            }
         }
     }
 }
