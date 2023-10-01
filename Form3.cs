@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Media;
@@ -17,19 +18,9 @@ namespace Francesco_Cheema___Inventory
     {
         public Form3()
         {
-        InitializeComponent();
+            InitializeComponent();
 
             textBox2.TextChanged += textBox2_TextChanged;
-
-        }
-
-        public static void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        public static void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
 
         }
 
@@ -55,7 +46,7 @@ namespace Francesco_Cheema___Inventory
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-    
+
         }
 
         private void textBox2_Validating(object sender, EventArgs e)
@@ -75,7 +66,47 @@ namespace Francesco_Cheema___Inventory
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
+            System.Windows.Forms.ToolTip tooltip1 = new System.Windows.Forms.ToolTip();
 
+            string s = textBox5.Text;
+
+            if (radioButton1.Checked)
+            {
+
+                if (string.IsNullOrWhiteSpace(s) || s.All(char.IsLetter))
+                {
+                    textBox5.BackColor = System.Drawing.Color.IndianRed;
+                    tooltip1.SetToolTip(textBox5, "Machine ID Required");
+                    tooltip1.BackColor = System.Drawing.Color.Gray;
+                }
+                else
+                {
+                    textBox5.BackColor = System.Drawing.Color.White;
+                }
+            }
+            else
+            {
+                textBox5.BackColor = System.Drawing.Color.White;
+            }
+
+
+            if (radioButton2.Checked)
+            {
+                if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
+                {
+                    textBox5.BackColor = System.Drawing.Color.IndianRed;
+                    tooltip1.SetToolTip(textBox5, "Company Name Required");
+                    tooltip1.BackColor = System.Drawing.Color.Gray;
+                }
+                else
+                {
+                    textBox5.BackColor = System.Drawing.Color.White;
+                }
+            }
+            else
+            {
+                textBox5.BackColor = System.Drawing.Color.White;
+            }
         }
 
         private void Form3_Load_1(object sender, EventArgs e)
@@ -133,22 +164,16 @@ namespace Francesco_Cheema___Inventory
 
         }
 
-        private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-
-            if (radioButton1.Checked == true)
-            {
-                label7.Text = "Machine ID";
-            }
+            label7.Text = "Machine ID";
+            textBox5.Text = "F Autobody";
         }
 
-        private void radioButton2_CheckedChanged_1(object sender, EventArgs e)
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton2.Checked == true)
-            {
-                label7.Text = "Company Name";
-            }
-            
+            label7.Text = "Company Name";
+            textBox5.Text = "F Autobody";
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

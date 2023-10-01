@@ -39,7 +39,7 @@
             this.deletebtn = new System.Windows.Forms.Button();
             this.modifyParts = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.deletebtn2 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.exitbtn = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -171,16 +171,17 @@
             this.button2.Text = "Modify";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // deletebtn2
             // 
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button4.Location = new System.Drawing.Point(1283, 487);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(69, 41);
-            this.button4.TabIndex = 12;
-            this.button4.Text = "Delete";
-            this.button4.UseVisualStyleBackColor = true;
+            this.deletebtn2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.deletebtn2.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.deletebtn2.Location = new System.Drawing.Point(1283, 487);
+            this.deletebtn2.Name = "deletebtn2";
+            this.deletebtn2.Size = new System.Drawing.Size(69, 41);
+            this.deletebtn2.TabIndex = 12;
+            this.deletebtn2.Text = "Delete";
+            this.deletebtn2.UseVisualStyleBackColor = true;
+            this.deletebtn2.Click += new System.EventHandler(this.deletebtn2_Click);
             // 
             // button5
             // 
@@ -235,7 +236,7 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.exitbtn);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.deletebtn2);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.modifyParts);
             this.Controls.Add(this.deletebtn);
@@ -270,7 +271,7 @@
         private System.Windows.Forms.Button deletebtn;
         private System.Windows.Forms.Button modifyParts;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button deletebtn2;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button exitbtn;
         private System.Windows.Forms.TextBox textBox2;

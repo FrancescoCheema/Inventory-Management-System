@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Linq;
 using System.Diagnostics.Eventing.Reader;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Francesco_Cheema___Inventory
 {
@@ -26,6 +27,7 @@ namespace Francesco_Cheema___Inventory
         private void Form1_Load(object sender, EventArgs e)
         {
             dataGridView1.ClearSelection();
+            dataGridView2.ClearSelection();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -97,6 +99,9 @@ namespace Francesco_Cheema___Inventory
         private void button2_Click(object sender, EventArgs e)
         {
             Form4 addPart = new Form4();
+
+            addPart.textBox1.ReadOnly = true;
+
             addPart.ShowDialog();
         }
 
@@ -139,7 +144,7 @@ namespace Francesco_Cheema___Inventory
                 Country.textBox3.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
                 Country.textBox4.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
                 Country.textBox1.ReadOnly = true;
-                Country.textBox5.Text = "F&K Autobody";
+                Country.textBox5.Text.ToString();
                 Country.textBox6.Text = "25";
                 Country.textBox7.Text = "20";
 
@@ -209,6 +214,34 @@ namespace Francesco_Cheema___Inventory
 
                     dataGridView1.DataSource = null;
                     dataGridView1.DataSource = ListClass.MyList;
+                }
+            }
+            else
+            {
+                MessageBox.Show("No row is selected to delete.");
+            }
+        }
+
+        private void deletebtn2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this product?", "Confirmation", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+
+                    DataGridViewRow selectedRow = dataGridView2.SelectedRows[0];
+
+                    int productID = Convert.ToInt32(selectedRow.Cells["ProductID"].Value);
+
+                    Products itemToRemove = ProductsList.MyList.FirstOrDefault(item => item.ProductID == productID);
+                    if (itemToRemove != null)
+                    {
+                        ProductsList.MyList.Remove(itemToRemove);
+                    }
+
+                    dataGridView2.DataSource = null;
+                    dataGridView2.DataSource = ProductsList.MyList;
                 }
             }
             else
