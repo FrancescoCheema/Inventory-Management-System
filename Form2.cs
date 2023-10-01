@@ -15,6 +15,8 @@ namespace Francesco_Cheema___Inventory
         public Form2()
         {
             InitializeComponent();
+
+            dataGridView1.DataSource = ListClass.MyList;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -68,6 +70,21 @@ namespace Francesco_Cheema___Inventory
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        internal void SetDataSource(DataGridView dataGridView1)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

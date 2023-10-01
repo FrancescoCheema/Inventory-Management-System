@@ -249,5 +249,12 @@ namespace Francesco_Cheema___Inventory
                 MessageBox.Show("No row is selected to delete.");
             }
         }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            Form2 form = new Form2();
+
+            form.ShowDialog();
+        }
     }
 }
