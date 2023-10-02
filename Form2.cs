@@ -29,7 +29,7 @@ namespace Francesco_Cheema___Inventory
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
+            this.WindowState = FormWindowState.Normal;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
