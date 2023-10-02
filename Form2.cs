@@ -18,9 +18,13 @@ namespace Francesco_Cheema___Inventory
 
             dataGridView1.DataSource = ListClass.MyList;
 
-            dataGridView2.DataSource = ProductsList.MyList;
+            dataGridView2.Columns.Add("PartID", "Part ID");
 
-            dataGridView2.Rows.Clear();
+            dataGridView2.Columns.Add("PartName", "Part Name");
+
+            dataGridView2.Columns.Add("Inventory", "Inventory");
+
+            dataGridView2.Columns.Add("Price", "Price");
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -75,7 +79,19 @@ namespace Francesco_Cheema___Inventory
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedrow = dataGridView1.SelectedRows[0];
 
+                DataGridViewRow newRow = new DataGridViewRow();
+
+                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = selectedrow.Cells[0].Value });
+                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = selectedrow.Cells[1].Value });
+                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = selectedrow.Cells[2].Value });
+                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = selectedrow.Cells[3].Value });
+
+                dataGridView2.Rows.Add(newRow);
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
