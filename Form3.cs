@@ -8,6 +8,7 @@ using System.Linq;
 using System.Media;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -22,6 +23,15 @@ namespace Francesco_Cheema___Inventory
 
             textBox2.TextChanged += textBox2_TextChanged;
 
+        }
+
+        public event Action<string> TextChangedInForm2;
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            string s = textBox1.Text;
+
+            TextChangedInForm2?.Invoke(s);
         }
 
         public static void label3_Click(object sender, EventArgs e)
@@ -44,10 +54,6 @@ namespace Francesco_Cheema___Inventory
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void textBox2_Validating(object sender, EventArgs e)
         {
@@ -73,7 +79,7 @@ namespace Francesco_Cheema___Inventory
             if (radioButton1.Checked)
             {
 
-                if (string.IsNullOrWhiteSpace(s) || s.All(char.IsLetter))
+                if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsDigit))
                 {
                     textBox5.BackColor = System.Drawing.Color.IndianRed;
                     tooltip1.SetToolTip(textBox5, "Machine ID Required");
@@ -84,13 +90,8 @@ namespace Francesco_Cheema___Inventory
                     textBox5.BackColor = System.Drawing.Color.White;
                 }
             }
-            else
-            {
-                textBox5.BackColor = System.Drawing.Color.White;
-            }
 
-
-            if (radioButton2.Checked)
+            else if (radioButton2.Checked)
             {
                 if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
                 {
@@ -108,20 +109,27 @@ namespace Francesco_Cheema___Inventory
                 textBox5.BackColor = System.Drawing.Color.White;
             }
         }
+      
+
 
         private void Form3_Load_1(object sender, EventArgs e)
         {
 
         }
 
+        private int SelectedRowIndex;
+
         private void button1_Click(object sender, EventArgs e)
         {
-            textBox2.Text = "";
-            textBox3.Text = "";
-            textBox4.Text = "";
-            textBox6.Text = "";
+            Form1 form = new Form1();
 
-            MessageBox.Show("Changes Saved Successfully.");
+            ListClass.MyList[SelectedRowIndex].PartName = textBox2.Text;
+
+            form.dataGridView1.Refresh();
+
+            form.dataGridView1.DataSource = ListClass.MyList;
+
+            MessageBox.Show("Changes Saved Successfully");
 
             this.Close();
         }
@@ -167,13 +175,11 @@ namespace Francesco_Cheema___Inventory
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             label7.Text = "Machine ID";
-            textBox5.Text = "F Autobody";
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             label7.Text = "Company Name";
-            textBox5.Text = "F Autobody";
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

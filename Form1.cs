@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Diagnostics.Eventing.Reader;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Threading;
 
 namespace Francesco_Cheema___Inventory
 {
@@ -16,13 +17,16 @@ namespace Francesco_Cheema___Inventory
 
             dataGridView1.DataSource = ListClass.MyList;
 
+            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.FromArgb(241, 231, 64);
+
             dataGridView2.DataSource = ProductsList.MyList;
+
+            dataGridView2.DefaultCellStyle.SelectionBackColor = Color.FromArgb(241, 231, 64);
+
+            synchronizationContext = SynchronizationContext.Current;
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-
-        }
+        public SynchronizationContext synchronizationContext;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -33,7 +37,7 @@ namespace Francesco_Cheema___Inventory
         private void button1_Click(object sender, EventArgs e)
         {
             dataGridView1.ClearSelection();
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 218, 185);
+            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.FromArgb(241, 231, 64);
             bool found = false;
             string searchText = textBox1.Text.Trim();
 
@@ -117,7 +121,7 @@ namespace Francesco_Cheema___Inventory
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridView1.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Yellow;
+           
         }
 
 
@@ -128,8 +132,8 @@ namespace Francesco_Cheema___Inventory
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-           
-           
+            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.FromArgb(241, 231, 64);
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -150,6 +154,10 @@ namespace Francesco_Cheema___Inventory
 
                 Country.ShowDialog();
             }
+            else
+            {
+                MessageBox.Show("Please select something to modify.");
+            }
         }
 
 
@@ -165,7 +173,7 @@ namespace Francesco_Cheema___Inventory
         private void textBox2_TextChanged_1(object sender, EventArgs e)
         {
             dataGridView2.ClearSelection();
-            dataGridView2.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 218, 185);
+            dataGridView2.DefaultCellStyle.SelectionBackColor = Color.FromArgb(241, 231, 64);
             bool found = false;
             string searchText = textBox2.Text.Trim();
 
