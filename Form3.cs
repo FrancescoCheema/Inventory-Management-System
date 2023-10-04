@@ -121,13 +121,23 @@ namespace Francesco_Cheema___Inventory
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+
             Form1 form = new Form1();
 
             ListClass.MyList[SelectedRowIndex].PartName = textBox2.Text;
 
-            form.dataGridView1.Refresh();
+            ListClass.MyList[SelectedRowIndex].Inventory = Int32.Parse(textBox3.Text);
 
-            form.dataGridView1.DataSource = ListClass.MyList;
+            ListClass.MyList[SelectedRowIndex].Price = Int32.Parse(textBox4.Text);
+
+
+            Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+
+            if(form1 != null)
+            {
+                form1.dataGridView1.Refresh();
+            }
 
             MessageBox.Show("Changes Saved Successfully");
 
