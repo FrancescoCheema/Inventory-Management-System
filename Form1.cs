@@ -34,6 +34,11 @@ namespace Francesco_Cheema___Inventory
             dataGridView2.ClearSelection();
         }
 
+        private void Form4_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void Form3_FormClosed(object sender, FormClosedEventArgs e)
         {
             dataGridView1.Refresh();
