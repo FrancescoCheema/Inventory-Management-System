@@ -183,6 +183,21 @@ namespace Francesco_Cheema___Inventory
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             label7.Text = "Machine ID";
+
+            System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+
+            string s = textBox4.Text;
+
+            if (!s.All(Char.IsDigit))
+            {
+                textBox4.BackColor = System.Drawing.Color.IndianRed;
+                toolTip1.SetToolTip(textBox4, "Price is required");
+                toolTip1.ForeColor = System.Drawing.Color.Gray;
+            }
+            else
+            {
+                textBox4.BackColor = System.Drawing.Color.White;
+            }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
