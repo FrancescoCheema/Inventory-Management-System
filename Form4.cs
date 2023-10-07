@@ -66,7 +66,21 @@ namespace Francesco_Cheema___Inventory
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
-            
+
+            System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+
+            string s = textBox5.Text;
+
+            if (string.IsNullOrEmpty(s) || s.All(Char.IsDigit))
+            {
+                textBox5.BackColor = System.Drawing.Color.IndianRed;
+                toolTip1.SetToolTip(textBox5, "Company is required");
+                toolTip1.ForeColor = System.Drawing.Color.Gray;
+            }
+            else
+            {
+                textBox5.BackColor = System.Drawing.Color.White;
+            }
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -108,6 +122,8 @@ namespace Francesco_Cheema___Inventory
 
         private void textBox7_TextChanged(object sender, EventArgs e)
         {
+            button1WasClicked = true;
+
             System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
 
             string s = textBox7.Text;
@@ -122,14 +138,6 @@ namespace Francesco_Cheema___Inventory
             {
                 textBox7.BackColor = System.Drawing.Color.White;
             }
-        }
-
-        private bool button1WasClicked = false;
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            button1WasClicked = true;
-
             if (Int32.TryParse(textBox7.Text, out int value7) && int.TryParse(textBox6.Text, out int value6))
             {
                 if (value7 > value6 && button1WasClicked == true)
@@ -138,6 +146,38 @@ namespace Francesco_Cheema___Inventory
                 }
             }
         }
+
+        private bool button1WasClicked = false;
+
+        private int SelectedRowIndex;
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string s = textBox2.Text;
+
+            if (s.All(Char.IsLetter))
+            {
+                Form1 form = new Form1();
+
+                ListClass.MyList[SelectedRowIndex].PartName = textBox2.Text;
+
+                ListClass.MyList[SelectedRowIndex].Inventory = Int32.Parse(textBox3.Text);
+
+                ListClass.MyList[SelectedRowIndex].Price = Int32.Parse(textBox4.Text);
+
+                Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+
+                if (form1 != null)
+                {
+                    form1.dataGridView1.Refresh();
+                }
+
+                MessageBox.Show("Changes Saved Successfully");
+
+                this.Close();
+            }
+        }
+        
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
