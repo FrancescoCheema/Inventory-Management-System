@@ -18,6 +18,14 @@ namespace Francesco_Cheema___Inventory
         {
             InitializeComponent();
 
+            button1.Enabled = false;
+
+            textBox2.TextChanged += TextBox_TextChanged;
+            textBox3.TextChanged += TextBox_TextChanged;
+            textBox4.TextChanged += TextBox_TextChanged;
+            textBox6.TextChanged += TextBox_TextChanged;
+            textBox7.TextChanged += TextBox_TextChanged;
+
             System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
 
             string s = textBox2.Text;
@@ -201,59 +209,60 @@ namespace Francesco_Cheema___Inventory
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private bool button1WasClicked = false;
 
         private int SelectedRowIndex;
 
-        private void button1_Click(object sender, EventArgs e)
+        private bool ValidateNumericInput(string text, out int result)
         {
-            string s = textBox2.Text;
+            return int.TryParse(text, out result);
+        }
 
-            if (!string.IsNullOrEmpty(textBox2.Text) &&
-                !string.IsNullOrEmpty(textBox3.Text) &&
-                !string.IsNullOrEmpty(textBox4.Text) &&
-                !string.IsNullOrEmpty(textBox5.Text) &&
-                !string.IsNullOrEmpty(textBox6.Text) &&
-                !string.IsNullOrEmpty(textBox7.Text))
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            string partName = textBox2.Text;
+            string inventoryText = textBox3.Text;
+            string priceText = textBox4.Text;
+            string textBox6Text = textBox6.Text;
+            string textBox7Text = textBox7.Text;
+
+            if (!string.IsNullOrEmpty(partName) &&
+                !string.IsNullOrEmpty(inventoryText) &&
+                !string.IsNullOrEmpty(priceText) &&
+                !string.IsNullOrEmpty(textBox6Text) &&
+                !string.IsNullOrEmpty(textBox7Text))
             {
-                Form1 form = new Form1();
-
-                button1.Enabled = true;
-
-                ListClass.MyList[SelectedRowIndex].PartName = textBox2.Text;
-
-                ListClass.MyList[SelectedRowIndex].Inventory = Int32.Parse(textBox3.Text);
-
-                ListClass.MyList[SelectedRowIndex].Price = Int32.Parse(textBox4.Text);
-
-                Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
-
-                if (form1 != null)
+                if (ValidateNumericInput(inventoryText, out int inventory) &&
+                   ValidateNumericInput(priceText, out int Price) &&
+                   ValidateNumericInput(textBox6Text, out int value6) &&
+                   ValidateNumericInput(textBox7Text, out int value7))
                 {
-                    form1.dataGridView1.Refresh();
+                    if(inventory > value6 && button1WasClicked)
+                    {
+                        MessageBox.Show("Your minimum exceeds your maximum.");
+                    }
+                    else
+                    {
+                        UpdateDataSource(SelectedRowIndex, partName, inventory, Price);
+                        Form1 form1 = Application.OpenForms()
+                    }
+                    button1.Enabled = true;
                 }
-
-                MessageBox.Show("Changes Saved Successfully");
-
-                this.Close();
-
-            }
-            else if (string.IsNullOrEmpty(textBox2.Text) ||
-                string.IsNullOrEmpty(textBox3.Text) ||
-                string.IsNullOrEmpty(textBox4.Text) ||
-                string.IsNullOrEmpty(textBox5.Text) ||
-                string.IsNullOrEmpty(textBox6.Text) ||
-                string.IsNullOrEmpty(textBox7.Text))
-            {
-                button1.Enabled = false;
-            }
-            else if (Int32.TryParse(textBox7.Text, out int value7) && int.TryParse(textBox6.Text, out int value6))
-            {
-                if (value7 > value6 && button1WasClicked == true)
+                else
                 {
-                    MessageBox.Show("Your minimum exceeds your maximum. ");
+                    button1.Enabled = false;
                 }
             }
+            else
+            {
+                button1.Enabled= false;
+            }
+             
         }
 
 
@@ -283,6 +292,11 @@ namespace Francesco_Cheema___Inventory
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             label7.Text = "Company Name";
+        }
+
+        private void Form4_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

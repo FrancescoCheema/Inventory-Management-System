@@ -110,6 +110,10 @@ namespace Francesco_Cheema___Inventory
 
         }
 
+        private bool button1WasClicked = false;
+
+        private int SelectedRowIndex;
+
         private void button2_Click(object sender, EventArgs e)
         {
             Form4 addPart = new Form4();
@@ -117,6 +121,7 @@ namespace Francesco_Cheema___Inventory
             addPart.textBox1.ReadOnly = true;
 
             addPart.ShowDialog();
+
         }
 
         private void button6_Click(object sender, EventArgs e)
