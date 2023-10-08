@@ -64,22 +64,83 @@ namespace Francesco_Cheema___Inventory
 
         }
 
+
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
-
-            System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
-
-            string s = textBox5.Text;
-
-            if (string.IsNullOrEmpty(s) || s.All(Char.IsDigit))
+            if (radioButton1.Checked)
             {
-                textBox5.BackColor = System.Drawing.Color.IndianRed;
-                toolTip1.SetToolTip(textBox5, "Company is required");
-                toolTip1.ForeColor = System.Drawing.Color.Gray;
+                System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+
+                string s = textBox5.Text;
+
+                if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsLetter))
+                {
+                    textBox5.BackColor = System.Drawing.Color.IndianRed;
+                    toolTip1.SetToolTip(textBox5, "Price is required");
+                    toolTip1.ForeColor = System.Drawing.Color.Gray;
+                }
+                else
+                {
+                    textBox5.BackColor = System.Drawing.Color.White;
+                }
             }
-            else
+
+            if (radioButton2.Checked)
             {
-                textBox5.BackColor = System.Drawing.Color.White;
+                System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+
+                string s = textBox5.Text;
+
+                if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
+                {
+                    textBox5.BackColor = System.Drawing.Color.IndianRed;
+                    toolTip1.SetToolTip(textBox5, "Company Name Required");
+                    toolTip1.BackColor = System.Drawing.Color.Gray;
+                }
+                else
+                {
+                    textBox5.BackColor = System.Drawing.Color.White;
+                }
+            }
+            
+        }
+
+        private void textBox5_Validating(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+
+                string s = textBox5.Text;
+
+                if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsLetter))
+                {
+                    textBox5.BackColor = System.Drawing.Color.IndianRed;
+                    toolTip1.SetToolTip(textBox5, "Price is required");
+                    toolTip1.ForeColor = System.Drawing.Color.Gray;
+                }
+                else
+                {
+                    textBox5.BackColor = System.Drawing.Color.White;
+                }
+            }
+
+            if (radioButton2.Checked)
+            {
+                System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+
+                string s = textBox5.Text;
+
+                if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
+                {
+                    textBox5.BackColor = System.Drawing.Color.IndianRed;
+                    toolTip1.SetToolTip(textBox5, "Company Name Required");
+                    toolTip1.BackColor = System.Drawing.Color.Gray;
+                }
+                else
+                {
+                    textBox5.BackColor = System.Drawing.Color.White;
+                }
             }
         }
 
@@ -138,13 +199,6 @@ namespace Francesco_Cheema___Inventory
             {
                 textBox7.BackColor = System.Drawing.Color.White;
             }
-            if (Int32.TryParse(textBox7.Text, out int value7) && int.TryParse(textBox6.Text, out int value6))
-            {
-                if (value7 > value6 && button1WasClicked == true)
-                {
-                    MessageBox.Show("Your minimum exceeds your maximum. ");
-                }
-            }
         }
 
         private bool button1WasClicked = false;
@@ -155,9 +209,16 @@ namespace Francesco_Cheema___Inventory
         {
             string s = textBox2.Text;
 
-            if (s.All(Char.IsLetter))
+            if (!string.IsNullOrEmpty(textBox2.Text) &&
+                !string.IsNullOrEmpty(textBox3.Text) &&
+                !string.IsNullOrEmpty(textBox4.Text) &&
+                !string.IsNullOrEmpty(textBox5.Text) &&
+                !string.IsNullOrEmpty(textBox6.Text) &&
+                !string.IsNullOrEmpty(textBox7.Text))
             {
                 Form1 form = new Form1();
+
+                button1.Enabled = true;
 
                 ListClass.MyList[SelectedRowIndex].PartName = textBox2.Text;
 
@@ -175,9 +236,26 @@ namespace Francesco_Cheema___Inventory
                 MessageBox.Show("Changes Saved Successfully");
 
                 this.Close();
+
+            }
+            else if (string.IsNullOrEmpty(textBox2.Text) ||
+                string.IsNullOrEmpty(textBox3.Text) ||
+                string.IsNullOrEmpty(textBox4.Text) ||
+                string.IsNullOrEmpty(textBox5.Text) ||
+                string.IsNullOrEmpty(textBox6.Text) ||
+                string.IsNullOrEmpty(textBox7.Text))
+            {
+                button1.Enabled = false;
+            }
+            else if (Int32.TryParse(textBox7.Text, out int value7) && int.TryParse(textBox6.Text, out int value6))
+            {
+                if (value7 > value6 && button1WasClicked == true)
+                {
+                    MessageBox.Show("Your minimum exceeds your maximum. ");
+                }
             }
         }
-        
+
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
@@ -199,7 +277,12 @@ namespace Francesco_Cheema___Inventory
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
+            label7.Text = "Machine ID";
+        }
 
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            label7.Text = "Company Name";
         }
     }
 }
