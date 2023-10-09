@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Francesco_Cheema___Inventory
 {
@@ -110,7 +102,7 @@ namespace Francesco_Cheema___Inventory
                     textBox5.BackColor = System.Drawing.Color.White;
                 }
             }
-            
+
         }
 
         private void textBox5_Validating(object sender, EventArgs e)
@@ -209,21 +201,29 @@ namespace Francesco_Cheema___Inventory
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ShowErrorMessage(string message)
         {
-
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private bool button1WasClicked = false;
+        private bool button1WasClicked = true;
 
         private int SelectedRowIndex;
+
+        private void UpdateDataSource(int rowIndex, string partName, int inventory, int price)
+        {
+            ListClass.MyList[rowIndex].PartName = partName;
+            ListClass.MyList[rowIndex].Inventory = inventory;
+            ListClass.MyList[rowIndex].Price = price;
+
+        }
 
         private bool ValidateNumericInput(string text, out int result)
         {
             return int.TryParse(text, out result);
         }
 
-        private void TextBox_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             string partName = textBox2.Text;
             string inventoryText = textBox3.Text;
@@ -236,33 +236,29 @@ namespace Francesco_Cheema___Inventory
                 !string.IsNullOrEmpty(priceText) &&
                 !string.IsNullOrEmpty(textBox6Text) &&
                 !string.IsNullOrEmpty(textBox7Text))
-            {
+
                 if (ValidateNumericInput(inventoryText, out int inventory) &&
-                   ValidateNumericInput(priceText, out int Price) &&
-                   ValidateNumericInput(textBox6Text, out int value6) &&
-                   ValidateNumericInput(textBox7Text, out int value7))
+                  ValidateNumericInput(priceText, out int Price) &&
+                  ValidateNumericInput(textBox6Text, out int value6) &&
+                  ValidateNumericInput(textBox7Text, out int value7))
                 {
-                    if(inventory > value6 && button1WasClicked)
+                    button1.Enabled = true;
+
+                    if (value7 > value6 && button1WasClicked)
                     {
                         MessageBox.Show("Your minimum exceeds your maximum.");
+
                     }
                     else
                     {
                         UpdateDataSource(SelectedRowIndex, partName, inventory, Price);
-                        Form1 form1 = Application.OpenForms()
+                        Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+                        form1.dataGridView1.Refresh();
+                        MessageBox.Show("Your changes have been successfully saved.");
+                        this.Close();
                     }
-                    button1.Enabled = true;
                 }
-                else
-                {
-                    button1.Enabled = false;
-                }
-            }
-            else
-            {
-                button1.Enabled= false;
-            }
-             
+                
         }
 
 
@@ -298,5 +294,38 @@ namespace Francesco_Cheema___Inventory
         {
 
         }
+
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            string partName = textBox2.Text;
+            string inventoryText = textBox3.Text;
+            string priceText = textBox4.Text;
+            string textBox6Text = textBox6.Text;
+            string textBox7Text = textBox7.Text;
+
+            if (!string.IsNullOrEmpty(partName) &&
+                !string.IsNullOrEmpty(inventoryText) &&
+                !string.IsNullOrEmpty(priceText) &&
+                !string.IsNullOrEmpty(textBox6Text) &&
+                !string.IsNullOrEmpty(textBox7Text))
+
+                if (ValidateNumericInput(inventoryText, out int inventory) &&
+                  ValidateNumericInput(priceText, out int Price) &&
+                  ValidateNumericInput(textBox6Text, out int value6) &&
+                  ValidateNumericInput(textBox7Text, out int value7))
+                {
+                    {
+                        button1.Enabled = true;
+                        UpdateDataSource(SelectedRowIndex, partName, inventory, Price);
+                        Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+                        form1.dataGridView1.Refresh();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Input in one of the fields");
+                }
+        }
+
     }
 }
