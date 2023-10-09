@@ -208,20 +208,12 @@ namespace Francesco_Cheema___Inventory
 
         private bool button1WasClicked = true;
 
-        private int SelectedRowIndex;
-
-        private void UpdateDataSource(int rowIndex, string partName, int inventory, int price)
-        {
-            ListClass.MyList[rowIndex].PartName = partName;
-            ListClass.MyList[rowIndex].Inventory = inventory;
-            ListClass.MyList[rowIndex].Price = price;
-
-        }
-
         private bool ValidateNumericInput(string text, out int result)
         {
             return int.TryParse(text, out result);
         }
+
+        private int lastPartID = 3;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -251,9 +243,20 @@ namespace Francesco_Cheema___Inventory
                     }
                     else
                     {
-                        UpdateDataSource(SelectedRowIndex, partName, inventory, Price);
+                        int maxPartID = ListClass.MyList.Max(p => p.PartID);
+
+                        int nextPartID = maxPartID + 1;
+
+                        Parts newPart = new Parts(nextPartID, partName, inventory, Price);
+                        
+                        ListClass.MyList.Add(newPart);
+
                         Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
-                        form1.dataGridView1.Refresh();
+
+                        form1.dataGridView1.DataSource = null;
+
+                        form1.dataGridView1.DataSource = ListClass.MyList;
+                        
                         MessageBox.Show("Your changes have been successfully saved.");
                         this.Close();
                     }
@@ -316,9 +319,6 @@ namespace Francesco_Cheema___Inventory
                 {
                     {
                         button1.Enabled = true;
-                        UpdateDataSource(SelectedRowIndex, partName, inventory, Price);
-                        Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
-                        form1.dataGridView1.Refresh();
                     }
                 }
                 else

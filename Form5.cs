@@ -98,5 +98,10 @@ namespace Francesco_Cheema___Inventory
                 textBox6.BackColor = System.Drawing.Color.White;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

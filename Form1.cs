@@ -15,6 +15,8 @@ namespace Francesco_Cheema___Inventory
         {
             InitializeComponent();
 
+            dataGridView1.ReadOnly = true;
+
             dataGridView1.DataSource = ListClass.MyList;
 
             dataGridView1.DefaultCellStyle.SelectionBackColor = Color.FromArgb(241, 231, 64);
