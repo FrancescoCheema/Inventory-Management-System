@@ -78,10 +78,12 @@ namespace Francesco_Cheema___Inventory
                     textBox5.BackColor = System.Drawing.Color.IndianRed;
                     toolTip1.SetToolTip(textBox5, "Price is required");
                     toolTip1.ForeColor = System.Drawing.Color.Gray;
+                    button1.Enabled = false;
                 }
                 else
                 {
                     textBox5.BackColor = System.Drawing.Color.White;
+                    button1.Enabled = true;
                 }
             }
 
@@ -96,52 +98,15 @@ namespace Francesco_Cheema___Inventory
                     textBox5.BackColor = System.Drawing.Color.IndianRed;
                     toolTip1.SetToolTip(textBox5, "Company Name Required");
                     toolTip1.BackColor = System.Drawing.Color.Gray;
+                    button1.Enabled = false;
                 }
                 else
                 {
                     textBox5.BackColor = System.Drawing.Color.White;
+                    button1.Enabled = true;
                 }
             }
 
-        }
-
-        private void textBox5_Validating(object sender, EventArgs e)
-        {
-            if (radioButton1.Checked)
-            {
-                System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
-
-                string s = textBox5.Text;
-
-                if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsLetter))
-                {
-                    textBox5.BackColor = System.Drawing.Color.IndianRed;
-                    toolTip1.SetToolTip(textBox5, "Price is required");
-                    toolTip1.ForeColor = System.Drawing.Color.Gray;
-                }
-                else
-                {
-                    textBox5.BackColor = System.Drawing.Color.White;
-                }
-            }
-
-            if (radioButton2.Checked)
-            {
-                System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
-
-                string s = textBox5.Text;
-
-                if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
-                {
-                    textBox5.BackColor = System.Drawing.Color.IndianRed;
-                    toolTip1.SetToolTip(textBox5, "Company Name Required");
-                    toolTip1.BackColor = System.Drawing.Color.Gray;
-                }
-                else
-                {
-                    textBox5.BackColor = System.Drawing.Color.White;
-                }
-            }
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -192,7 +157,7 @@ namespace Francesco_Cheema___Inventory
             if (string.IsNullOrEmpty(s) || s.All(Char.IsLetter))
             {
                 textBox7.BackColor = System.Drawing.Color.IndianRed;
-                toolTip1.SetToolTip(textBox7, "Price is required");
+                toolTip1.SetToolTip(textBox7, "Minimum is required");
                 toolTip1.ForeColor = System.Drawing.Color.Gray;
             }
             else
@@ -233,35 +198,39 @@ namespace Francesco_Cheema___Inventory
                   ValidateNumericInput(priceText, out int Price) &&
                   ValidateNumericInput(textBox6Text, out int value6) &&
                   ValidateNumericInput(textBox7Text, out int value7))
+
                 {
-                    button1.Enabled = true;
 
-                    if (value7 > value6 && button1WasClicked)
+                    button1.Enabled = false;
                     {
-                        MessageBox.Show("Your minimum exceeds your maximum.");
 
-                    }
-                    else
-                    {
-                        int maxPartID = ListClass.MyList.Max(p => p.PartID);
+                        if (value7 > value6 && button1WasClicked)
+                        {
+                            MessageBox.Show("Your minimum exceeds your maximum.");
 
-                        int nextPartID = maxPartID + 1;
+                        }
 
-                        Parts newPart = new Parts(nextPartID, partName, inventory, Price);
-                        
-                        ListClass.MyList.Add(newPart);
+                        else
+                        {
+                            int maxPartID = ListClass.MyList.Max(p => p.PartID);
 
-                        Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+                            int nextPartID = maxPartID + 1;
 
-                        form1.dataGridView1.DataSource = null;
+                            Parts newPart = new Parts(nextPartID, partName, inventory, Price);
 
-                        form1.dataGridView1.DataSource = ListClass.MyList;
-                        
-                        MessageBox.Show("Your changes have been successfully saved.");
-                        this.Close();
+                            ListClass.MyList.Add(newPart);
+
+                            Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+
+                            form1.dataGridView1.DataSource = null;
+
+                            form1.dataGridView1.DataSource = ListClass.MyList;
+
+                            MessageBox.Show("Your changes have been successfully saved.");
+                            this.Close();
+                        }
                     }
                 }
-                
         }
 
 
@@ -274,7 +243,7 @@ namespace Francesco_Cheema___Inventory
             if (string.IsNullOrEmpty(s) || s.All(Char.IsLetter))
             {
                 textBox6.BackColor = System.Drawing.Color.IndianRed;
-                toolTip1.SetToolTip(textBox6, "Price is required");
+                toolTip1.SetToolTip(textBox6, "Maximum is required");
                 toolTip1.ForeColor = System.Drawing.Color.Gray;
             }
             else
@@ -316,16 +285,52 @@ namespace Francesco_Cheema___Inventory
                   ValidateNumericInput(priceText, out int Price) &&
                   ValidateNumericInput(textBox6Text, out int value6) &&
                   ValidateNumericInput(textBox7Text, out int value7))
-                {
-                    {
-                        button1.Enabled = true;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Invalid Input in one of the fields");
-                }
-        }
 
-    }
-}
+                    if (radioButton1.Checked)
+                    {
+                        System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+
+                        string s = textBox5.Text;
+
+                        if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsLetter))
+                        {
+                            textBox5.BackColor = System.Drawing.Color.IndianRed;
+                            toolTip1.SetToolTip(textBox5, "Price is required");
+                            toolTip1.ForeColor = System.Drawing.Color.Gray;
+                            button1.Enabled = false;
+                        }
+                        else
+                        {
+                            textBox5.BackColor = System.Drawing.Color.White;
+                            button1.Enabled = true;
+                        }
+
+                        if (radioButton2.Checked)
+                        {
+                            System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+
+                            string s = textBox5.Text;
+
+                            if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
+                            {
+                                textBox5.BackColor = System.Drawing.Color.IndianRed;
+                                toolTip1.SetToolTip(textBox5, "Company Name Required");
+                                toolTip1.BackColor = System.Drawing.Color.Gray;
+                                button1.Enabled = false;
+                            }
+                            else
+                            {
+                                textBox5.BackColor = System.Drawing.Color.White;
+                                button1.Enabled = true;
+                            }
+                        }
+                    }
+            { 
+
+                button1.Enabled = true;
+            }
+            else
+                        {
+                            MessageBox.Show("Invalid Input in one of the fields");
+                        }
+                    }
