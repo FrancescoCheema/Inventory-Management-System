@@ -12,12 +12,6 @@ namespace Francesco_Cheema___Inventory
 
             button1.Enabled = false;
 
-            textBox2.TextChanged += TextBox_TextChanged;
-            textBox3.TextChanged += TextBox_TextChanged;
-            textBox4.TextChanged += TextBox_TextChanged;
-            textBox6.TextChanged += TextBox_TextChanged;
-            textBox7.TextChanged += TextBox_TextChanged;
-
             System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
 
             string s = textBox2.Text;
@@ -64,13 +58,11 @@ namespace Francesco_Cheema___Inventory
 
         }
 
-
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
             if (radioButton1.Checked)
             {
                 System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
-
                 string s = textBox5.Text;
 
                 if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsLetter))
@@ -90,7 +82,6 @@ namespace Francesco_Cheema___Inventory
             if (radioButton2.Checked)
             {
                 System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
-
                 string s = textBox5.Text;
 
                 if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
@@ -106,8 +97,36 @@ namespace Francesco_Cheema___Inventory
                     button1.Enabled = true;
                 }
             }
-
         }
+
+        private bool ValidateTextBox5ForPrice()
+        {
+            string s = textBox5.Text;
+
+            if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsLetter))
+            {
+                SetTextBoxError("Price Required");
+                return false;
+            }
+
+            ClearTextBox5Error();
+            return true;
+        }
+
+        private bool ValidateTextBox5ForCompanyName()
+        {
+            string s = textBox5.Text;
+
+            if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsLetter))
+            {
+                SetTextBoxError("Company Name Required");
+                return false;
+            }
+
+            ClearTextBox5Error();
+            return true;
+        }
+
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
@@ -180,60 +199,6 @@ namespace Francesco_Cheema___Inventory
 
         private int lastPartID = 3;
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string partName = textBox2.Text;
-            string inventoryText = textBox3.Text;
-            string priceText = textBox4.Text;
-            string textBox6Text = textBox6.Text;
-            string textBox7Text = textBox7.Text;
-
-            if (!string.IsNullOrEmpty(partName) &&
-                !string.IsNullOrEmpty(inventoryText) &&
-                !string.IsNullOrEmpty(priceText) &&
-                !string.IsNullOrEmpty(textBox6Text) &&
-                !string.IsNullOrEmpty(textBox7Text))
-
-                if (ValidateNumericInput(inventoryText, out int inventory) &&
-                  ValidateNumericInput(priceText, out int Price) &&
-                  ValidateNumericInput(textBox6Text, out int value6) &&
-                  ValidateNumericInput(textBox7Text, out int value7))
-
-                {
-
-                    button1.Enabled = false;
-                    {
-
-                        if (value7 > value6 && button1WasClicked)
-                        {
-                            MessageBox.Show("Your minimum exceeds your maximum.");
-
-                        }
-
-                        else
-                        {
-                            int maxPartID = ListClass.MyList.Max(p => p.PartID);
-
-                            int nextPartID = maxPartID + 1;
-
-                            Parts newPart = new Parts(nextPartID, partName, inventory, Price);
-
-                            ListClass.MyList.Add(newPart);
-
-                            Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
-
-                            form1.dataGridView1.DataSource = null;
-
-                            form1.dataGridView1.DataSource = ListClass.MyList;
-
-                            MessageBox.Show("Your changes have been successfully saved.");
-                            this.Close();
-                        }
-                    }
-                }
-        }
-
-
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
             System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
@@ -267,29 +232,34 @@ namespace Francesco_Cheema___Inventory
 
         }
 
-        private void TextBox_TextChanged(object sender, EventArgs e)
+        private void button1_click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TextBox_TexChanged(object sender, EventArgs e)
         {
             string partName = textBox2.Text;
             string inventoryText = textBox3.Text;
             string priceText = textBox4.Text;
             string textBox6Text = textBox6.Text;
             string textBox7Text = textBox7.Text;
+            int price = 0;
 
             if (!string.IsNullOrEmpty(partName) &&
                 !string.IsNullOrEmpty(inventoryText) &&
                 !string.IsNullOrEmpty(priceText) &&
                 !string.IsNullOrEmpty(textBox6Text) &&
                 !string.IsNullOrEmpty(textBox7Text))
-
+            {
                 if (ValidateNumericInput(inventoryText, out int inventory) &&
-                  ValidateNumericInput(priceText, out int Price) &&
-                  ValidateNumericInput(textBox6Text, out int value6) &&
-                  ValidateNumericInput(textBox7Text, out int value7))
-
+                    ValidateNumericInput(priceText, out price) &&
+                    ValidateNumericInput(textBox6Text, out int value6) &&
+                    ValidateNumericInput(textBox7Text, out int value7))
+                {
                     if (radioButton1.Checked)
                     {
                         System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
-
                         string s = textBox5.Text;
 
                         if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsLetter))
@@ -304,33 +274,190 @@ namespace Francesco_Cheema___Inventory
                             textBox5.BackColor = System.Drawing.Color.White;
                             button1.Enabled = true;
                         }
+                    }
 
-                        if (radioButton2.Checked)
+                    if (radioButton2.Checked)
+                    {
+                        System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+                        string s = textBox5.Text;
+
+                        if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
                         {
-                            System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
-
-                            string s = textBox5.Text;
-
-                            if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
-                            {
-                                textBox5.BackColor = System.Drawing.Color.IndianRed;
-                                toolTip1.SetToolTip(textBox5, "Company Name Required");
-                                toolTip1.BackColor = System.Drawing.Color.Gray;
-                                button1.Enabled = false;
-                            }
-                            else
-                            {
-                                textBox5.BackColor = System.Drawing.Color.White;
-                                button1.Enabled = true;
-                            }
+                            textBox5.BackColor = System.Drawing.Color.IndianRed;
+                            toolTip1.SetToolTip(textBox5, "Company Name Required");
+                            toolTip1.BackColor = System.Drawing.Color.Gray;
+                            button1.Enabled = false;
+                        }
+                        else
+                        {
+                            textBox5.BackColor = System.Drawing.Color.White;
+                            button1.Enabled = true;
                         }
                     }
-            { 
-
-                button1.Enabled = true;
-            }
+                }
             else
+            {
+                int maxPartID = ListClass.MyList.Max(p => p.PartID);
+
+                int nextPartID = maxPartID + 1;
+
+                Parts newPart = new Parts(nextPartID, partName, inventory, price);
+
+                ListClass.MyList.Add(newPart);
+
+                Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+
+                form1.dataGridView1.DataSource = null;
+                form1.dataGridView1.DataSource = ListClass.MyList;
+
+                MessageBox.Show("Your changes have been successfully saved.");
+                this.Close();
+            }
+        }
+    }
+
+
+    private void EnableButton()
+        {
+            button1.Enabled = true;
+        }
+
+        private void SetTextBoxError(string errorMessage)
+        {
+            textBox5.BackColor = System.Drawing.Color.IndianRed;
+            System.Windows.Forms.ToolTip tooltip1 = new System.Windows.Forms.ToolTip();
+            tooltip1.SetToolTip(textBox5, errorMessage);
+            tooltip1.ForeColor = System.Drawing.Color.Gray;
+            button1.Enabled = false;
+        }
+
+        private void ClearTextBox5Error()
+        {
+            textBox5.BackColor= System.Drawing.Color.Gray;
+            EnableButton();
+        }
+
+        private bool ValidateInputFields()
+        {
+            string partName = textBox2.Text;
+            string inventoryText = textBox3.Text;
+            string priceText = textBox4.Text;
+            string textBox6Text = textBox6.Text;
+            string textBox7Text = textBox7.Text;
+
+            if (!string.IsNullOrEmpty(partName) &&
+                !string.IsNullOrEmpty(inventoryText) &&
+                !string.IsNullOrEmpty(priceText) &&
+                !string.IsNullOrEmpty(textBox6Text) &&
+                !string.IsNullOrEmpty(textBox7Text))
+            {
+                return false;
+            }
+
+            if (ValidateNumericInput(inventoryText, out int inventory) &&
+              ValidateNumericInput(priceText, out int Price) &&
+              ValidateNumericInput(textBox6Text, out int value6) &&
+              ValidateNumericInput(textBox7Text, out int value7))
+            {
+                return false;
+            }
+
+            if (radioButton1.Checked)
+            {
+                return ValidateTextBox5ForPrice();
+            }
+            else if (radioButton2.Checked)
+            {
+                return ValidateTextBox5ForCompanyName();
+            }
+
+            return true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            string partName = textBox2.Text;
+            string inventoryText = textBox3.Text;
+            string priceText = textBox4.Text;
+            string textBox6Text = textBox6.Text;
+            string textBox7Text = textBox7.Text;
+            int price = 0;
+
+            if (!string.IsNullOrEmpty(partName) &&
+                !string.IsNullOrEmpty(inventoryText) &&
+                !string.IsNullOrEmpty(priceText) &&
+                !string.IsNullOrEmpty(textBox6Text) &&
+                !string.IsNullOrEmpty(textBox7Text))
+            {
+                if (ValidateNumericInput(inventoryText, out int inventory) &&
+                    ValidateNumericInput(priceText, out price) &&
+                    ValidateNumericInput(textBox6Text, out int value6) &&
+                    ValidateNumericInput(textBox7Text, out int value7))
+                {
+                    button1.Enabled = false;
+                
+                    if (radioButton1.Checked)
+                    {
+                        System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+                        string s = textBox5.Text;
+
+                        if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsLetter))
                         {
-                            MessageBox.Show("Invalid Input in one of the fields");
+                            textBox5.BackColor = System.Drawing.Color.IndianRed;
+                            toolTip1.SetToolTip(textBox5, "Price is required");
+                            toolTip1.ForeColor = System.Drawing.Color.Gray;
+                            button1.Enabled = false;
+                        }
+                        else
+                        {
+                            textBox5.BackColor = System.Drawing.Color.White;
+                            button1.Enabled = true;
                         }
                     }
+
+                    if (radioButton2.Checked)
+                    {
+                        System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+                        string s = textBox5.Text;
+
+                        if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
+                        {
+                            textBox5.BackColor = System.Drawing.Color.IndianRed;
+                            toolTip1.SetToolTip(textBox5, "Company Name Required");
+                            toolTip1.BackColor = System.Drawing.Color.Gray;
+                            button1.Enabled = false;
+                        }
+                        else
+                        {
+                            textBox5.BackColor = System.Drawing.Color.White;
+                            button1.Enabled = true;
+                        }
+                    }
+                }
+                else if(button1.Click == true)
+                {
+                    button1.Enabled = true;
+
+                    int maxPartID = ListClass.MyList.Max(p => p.PartID);
+
+                    int nextPartID = maxPartID + 1;
+
+                    Parts newPart = new Parts(nextPartID, partName, inventory, price);
+
+                    ListClass.MyList.Add(newPart);
+
+                    Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+
+                    form1.dataGridView1.DataSource = null;
+                    form1.dataGridView1.DataSource = ListClass.MyList;
+
+                    MessageBox.Show("Your changes have been successfully saved.");
+                    this.Close();
+                }
+            }
+        }
+    }
+}
+
+
