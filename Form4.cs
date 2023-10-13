@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Windows.Forms;
@@ -130,7 +131,7 @@ namespace Francesco_Cheema___Inventory
             {
                 if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsDigit))
                 {
-                    textBox5.BackColor = System.Drawing.Color.White; 
+                    textBox5.BackColor = System.Drawing.Color.White;
                 }
                 else
                 {
@@ -143,7 +144,7 @@ namespace Francesco_Cheema___Inventory
             {
                 if (string.IsNullOrWhiteSpace(s) || s.All(char.IsLetter))
                 {
-                    textBox5.BackColor = System.Drawing.Color.White; 
+                    textBox5.BackColor = System.Drawing.Color.White;
                 }
                 else
                 {
@@ -154,6 +155,7 @@ namespace Francesco_Cheema___Inventory
             }
         }
 
+
         private bool button1WasClicked = true;
 
         private bool ValidateNumericInput(string text, out int result)
@@ -162,6 +164,48 @@ namespace Francesco_Cheema___Inventory
         }
 
         private int lastPartID = 3;
+
+        private void button1_click(object sender, EventArgs e)
+        {
+            string partName = textBox2.Text;
+            string inventoryText = textBox3.Text;
+            string priceText = textBox4.Text;
+            string textBox6Text = textBox6.Text;
+            string textBox7Text = textBox7.Text;
+            int price = 0;
+            int inventory = 0;
+            int max = 0;
+            int value7 = 0;
+            string idorcompany = textBox5.Text;
+
+            if (ValidateNumericInput(inventoryText, out inventory) &&
+                    ValidateNumericInput(priceText, out price) &&
+                    ValidateNumericInput(textBox6Text, out max) &&
+                    ValidateNumericInput(textBox7Text, out value7))
+
+                if (value7 > max && button1WasClicked)
+                {
+                    MessageBox.Show("Your minimum exceeds your maximum.");
+                    button1.Enabled = false;
+                }
+                else
+                {
+
+                    int maxPartID = ListClass.MyList.Max(p => p.PartID);
+                    int nextPartID = maxPartID + 1;
+
+                    Parts newPart = new Parts(nextPartID, partName, inventory, price, value7, max , idorcompany);
+                    ListClass.MyList.Add(newPart);
+
+                    Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+
+                    form1.dataGridView1.DataSource = null;
+                    form1.dataGridView1.DataSource = ListClass.MyList;
+
+                    MessageBox.Show("Your changes have been successfully saved.");
+                    this.Close();
+                }
+        }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
@@ -196,7 +240,7 @@ namespace Francesco_Cheema___Inventory
 
         }
 
-    private void TextBox_TextChanged(object sender, EventArgs e)
+        private void TextBox_TextChanged(object sender, EventArgs e)
         {
             string partName = textBox2.Text;
             string inventoryText = textBox3.Text;
@@ -204,102 +248,76 @@ namespace Francesco_Cheema___Inventory
             string textBox6Text = textBox6.Text;
             string textBox7Text = textBox7.Text;
             int price = 0;
+            int inventory = 0;
 
-            if (!string.IsNullOrEmpty(partName) &&
-                !string.IsNullOrEmpty(inventoryText) &&
-                !string.IsNullOrEmpty(priceText) &&
-                !string.IsNullOrEmpty(textBox6Text) &&
-                !string.IsNullOrEmpty(textBox7Text))
+            bool allFieldsEntered = !string.IsNullOrEmpty(partName) &&
+                                    !string.IsNullOrEmpty(inventoryText) &&
+                                    !string.IsNullOrEmpty(priceText) &&
+                                    !string.IsNullOrEmpty(textBox6Text) &&
+                                    !string.IsNullOrEmpty(textBox7Text);
+
+            if (allFieldsEntered)
             {
-                button1.Enabled = false;
-
-                if (ValidateNumericInput(inventoryText, out int inventory) &&
+                if (ValidateNumericInput(inventoryText, out inventory) &&
                     ValidateNumericInput(priceText, out price) &&
                     ValidateNumericInput(textBox6Text, out int value6) &&
                     ValidateNumericInput(textBox7Text, out int value7))
                 {
-                    if (value7 > value6 & button1WasClicked)
+
+                    if (radioButton1.Checked)
                     {
-                        MessageBox.Show("Your minimum exceeds your maximum.");
-                        return;
+                        System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+                        string s = textBox5.Text;
+
+                        if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsLetter))
+                        {
+                            textBox5.BackColor = System.Drawing.Color.IndianRed;
+                            toolTip1.SetToolTip(textBox5, "Price is required");
+                            toolTip1.ForeColor = System.Drawing.Color.Gray;
+                            button1.Enabled = false;
+                        }
+                        else
+                        {
+                            textBox5.BackColor = System.Drawing.Color.White;
+                            button1.Enabled = true;
+                        }
                     }
+                    if (radioButton2.Checked)
+                    {
+                        System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+                        string s = textBox5.Text;
 
-                        button1.Enabled = true;
-
-                        int maxPartID = ListClass.MyList.Max(p => p.PartID);
-                        int nextPartID = maxPartID + 1;
-
-                        Parts newPart = new Parts(nextPartID, partName, inventory, price);
-                        ListClass.MyList.Add(newPart);
-
-                        Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
-
-                        form1.dataGridView1.DataSource = null;
-                        form1.dataGridView1.DataSource = ListClass.MyList;
-
-                        MessageBox.Show("Your changes have been successfully saved.");
-                        this.Close();
+                        if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
+                        {
+                            textBox5.BackColor = System.Drawing.Color.IndianRed;
+                            toolTip1.SetToolTip(textBox5, "Company Name Required");
+                            toolTip1.BackColor = System.Drawing.Color.Gray;
+                            button1.Enabled = false;
+                        }
+                        else
+                        {
+                            textBox5.BackColor = System.Drawing.Color.White;
+                            button1.Enabled = true;
+                        }
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Input in one of the fields");
+                    button1.Enabled = false;
                 }
             }
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
+            else
             {
-                string partName = textBox2.Text;
-                string inventoryText = textBox3.Text;
-                string priceText = textBox4.Text;
-                string textBox6Text = textBox6.Text;
-                string textBox7Text = textBox7.Text;
-                int price = 0;
-
-                if (!string.IsNullOrEmpty(partName) &&
-                    !string.IsNullOrEmpty(inventoryText) &&
-                    !string.IsNullOrEmpty(priceText) &&
-                    !string.IsNullOrEmpty(textBox6Text) &&
-                    !string.IsNullOrEmpty(textBox7Text))
-                { 
-
-                    if (ValidateNumericInput(inventoryText, out int inventory) &&
-                        ValidateNumericInput(priceText, out price) &&
-                        ValidateNumericInput(textBox6Text, out int value6) &&
-                        ValidateNumericInput(textBox7Text, out int value7))
-                    {
-
-                        if (value7 > value6 & button1WasClicked)
-                        {
-                            MessageBox.Show("Your minimum exceeds your maximum.");
-                            return;
-                        }
-
-                    }
-                        int maxPartID = ListClass.MyList.Max(p => p.PartID);
-                        int nextPartID = maxPartID + 1;
-
-                        Parts newPart = new Parts(nextPartID, partName, inventory, price);
-                        ListClass.MyList.Add(newPart);
-
-                        Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
-
-                        form1.dataGridView1.DataSource = null;
-                        form1.dataGridView1.DataSource = ListClass.MyList;
-
-                        MessageBox.Show("Your changes have been successfully saved.");
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Invalid Input in one of the fields");
-                    }
-                }
+                button1.Enabled = false;
             }
         }
+
     }
+    }
+
+
+
+
 
 
 

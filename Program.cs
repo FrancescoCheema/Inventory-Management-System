@@ -14,10 +14,10 @@ namespace Francesco_Cheema___Inventory
         [STAThread]
         static void Main()
         {
-            ListClass.MyList.Add(new Parts(0, "Wheel", 4, 300));
-            ListClass.MyList.Add(new Parts(1, "Muffler", 17, 100));
-            ListClass.MyList.Add(new Parts(2, "Transmission", 5, 1300));
-            ListClass.MyList.Add(new Parts(3, "Tire", 8, 500));
+            ListClass.MyList.Add(new Parts(0, "Wheel", 4, 300, 10, 1, "3"));
+            ListClass.MyList.Add(new Parts(1, "Muffler", 17, 100, 7, 8, "9"));
+            ListClass.MyList.Add(new Parts(2, "Transmission", 5, 1300, 12, 10, "4"));
+            ListClass.MyList.Add(new Parts(3, "Tire", 8, 500, 14, 13, "6"));
 
             ProductsList.MyList.Add(new Products(0, "Nissan Skyline GTT 1999" , 1, 45000));
             ProductsList.MyList.Add(new Products(1, "Honda Civic SI 2023", 2, 37000));

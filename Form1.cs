@@ -166,8 +166,9 @@ namespace Francesco_Cheema___Inventory
                 Country.textBox4.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
                 Country.textBox1.ReadOnly = true;
                 Country.textBox5.Text.ToString();
-                Country.textBox6.Text = "25";
-                Country.textBox7.Text = "20";
+                Country.textBox5.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+                Country.textBox6.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+                Country.textBox7.Text = dataGridView1.CurrentRow.Cells[6].Value.ToString();
 
                 Country.ShowDialog();
             }
