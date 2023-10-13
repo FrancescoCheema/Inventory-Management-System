@@ -32,8 +32,21 @@ namespace Francesco_Cheema___Inventory
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            /* dataGridView1.AutoGenerateColumns = false;
+
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.Visible = false;
+            }
+
+            dataGridView1.Columns[0].Visible = true;
+            dataGridView1.Columns[1].Visible = true;
+            dataGridView1.Columns[2].Visible = true;
+            dataGridView1.Columns[3].Visible = true;
+            */
             dataGridView1.ClearSelection();
             dataGridView2.ClearSelection();
+            
         }
 
         private void Form4_Load(object sender, EventArgs e)
@@ -165,10 +178,9 @@ namespace Francesco_Cheema___Inventory
                 Country.textBox3.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
                 Country.textBox4.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
                 Country.textBox1.ReadOnly = true;
-                Country.textBox5.Text.ToString();
-                Country.textBox5.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
-                Country.textBox6.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
-                Country.textBox7.Text = dataGridView1.CurrentRow.Cells[6].Value.ToString();
+                Country.textBox6.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+                Country.textBox7.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+                Country.textBox5.Text = dataGridView1.CurrentRow.Cells[6].Value.ToString();
 
                 Country.ShowDialog();
             }

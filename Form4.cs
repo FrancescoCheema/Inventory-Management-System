@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Francesco_Cheema___Inventory
 {
@@ -132,11 +133,12 @@ namespace Francesco_Cheema___Inventory
                 if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsDigit))
                 {
                     textBox5.BackColor = System.Drawing.Color.White;
+                    toolTip1.Active = false;
                 }
                 else
                 {
                     textBox5.BackColor = System.Drawing.Color.IndianRed;
-                    toolTip1.SetToolTip(textBox5, "Price is required");
+                    toolTip1.SetToolTip(textBox5, "Machine ID is required");
                     toolTip1.ForeColor = System.Drawing.Color.Gray;
                 }
             }
@@ -145,6 +147,7 @@ namespace Francesco_Cheema___Inventory
                 if (string.IsNullOrWhiteSpace(s) || s.All(char.IsLetter))
                 {
                     textBox5.BackColor = System.Drawing.Color.White;
+                    toolTip1.Active = false;
                 }
                 else
                 {
@@ -228,11 +231,46 @@ namespace Francesco_Cheema___Inventory
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             label7.Text = "Machine ID";
+
+            System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+
+            string s = textBox5.Text;
+
+            if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsLetter))
+            {
+                textBox5.BackColor = System.Drawing.Color.IndianRed;
+                toolTip1.SetToolTip(textBox5, "Machine ID is required");
+                toolTip1.ForeColor = System.Drawing.Color.Gray;
+                button1.Enabled = false;
+            }
+            else
+            {
+                textBox5.BackColor = System.Drawing.Color.White;
+                button1.Enabled = true;
+                toolTip1.Active = false;
+            }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             label7.Text = "Company Name";
+
+            System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+            string s = textBox5.Text;
+
+            if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
+            {
+                textBox5.BackColor = System.Drawing.Color.IndianRed;
+                toolTip1.SetToolTip(textBox5, "Company Name is required");
+                toolTip1.BackColor = System.Drawing.Color.Gray;
+                button1.Enabled = false;
+            }
+            else
+            {
+                textBox5.BackColor = System.Drawing.Color.White;
+                button1.Enabled = true;
+                toolTip1.Active = false;
+            }
         }
 
         private void Form4_Load(object sender, EventArgs e)
@@ -272,7 +310,7 @@ namespace Francesco_Cheema___Inventory
                         if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsLetter))
                         {
                             textBox5.BackColor = System.Drawing.Color.IndianRed;
-                            toolTip1.SetToolTip(textBox5, "Price is required");
+                            toolTip1.SetToolTip(textBox5, "Machine ID is required");
                             toolTip1.ForeColor = System.Drawing.Color.Gray;
                             button1.Enabled = false;
                         }
@@ -280,6 +318,7 @@ namespace Francesco_Cheema___Inventory
                         {
                             textBox5.BackColor = System.Drawing.Color.White;
                             button1.Enabled = true;
+                            toolTip1.Active = false;
                         }
                     }
                     if (radioButton2.Checked)
@@ -290,7 +329,7 @@ namespace Francesco_Cheema___Inventory
                         if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
                         {
                             textBox5.BackColor = System.Drawing.Color.IndianRed;
-                            toolTip1.SetToolTip(textBox5, "Company Name Required");
+                            toolTip1.SetToolTip(textBox5, "Company Name is required");
                             toolTip1.BackColor = System.Drawing.Color.Gray;
                             button1.Enabled = false;
                         }
@@ -298,6 +337,7 @@ namespace Francesco_Cheema___Inventory
                         {
                             textBox5.BackColor = System.Drawing.Color.White;
                             button1.Enabled = true;
+                            toolTip1.Active = false;
                         }
                     }
                 }

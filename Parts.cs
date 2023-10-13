@@ -20,6 +20,7 @@ namespace Francesco_Cheema___Inventory
         public int Max { get; set; }
 
         public int Value7 { get; set; }
+
         public string IdOrCompany { get; set; }
 
         public Parts(int partID, string Part, int inventory, int a, int max, int value7, string idorcompany)
