@@ -34,6 +34,33 @@ namespace Francesco_Cheema___Inventory
             this.WindowState = FormWindowState.Normal;
         }
 
+        private bool ValidateNumericInput(string text, out int result)
+        {
+            return int.TryParse(text, out result);
+        }
+
+        private void textBox_TextChanged(object sender, EventArgs e)
+        {
+            string maxText = textBox6.Text;
+            string minText = textBox5.Text;
+            int max = 0;
+            int min = 0;
+
+            if (ValidateNumericInput(maxText, out max) &&
+                (ValidateNumericInput(minText, out min)))
+            {
+                if (min > max && button3WasClicked)
+                {
+                    MessageBox.Show("Your minimum exceeds your maximu.");
+                    button3.Enabled = false;
+                }
+                else
+                {
+                    button3.Enabled = true;
+                }
+            }
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -259,6 +286,24 @@ namespace Francesco_Cheema___Inventory
             ProductsList.MyList[SelectedRowIndex].Max = Int32.Parse(textBox6.Text);
             ProductsList.MyList[SelectedRowIndex].Min = Int32.Parse(textBox5.Text);
 
+            string maxText = textBox6.Text;
+            string minText = textBox5.Text;
+            int max = 0;
+            int min = 0;
+
+            if (ValidateNumericInput(maxText, out max) &&
+                (ValidateNumericInput(minText, out min)))
+            {
+                if (min > max && button3WasClicked)
+                {
+                    MessageBox.Show("Your minimum exceeds your maximum.");
+                    button3.Enabled = false;
+                }
+                else
+                {
+                    button3.Enabled = true;
+                }
+            }
             if (dataGridView2.Rows.Count > 0)
             {
                 button3.Enabled = true;
@@ -269,10 +314,10 @@ namespace Francesco_Cheema___Inventory
                 {
                     form1.dataGridView1.Refresh();
                 }
-
                 MessageBox.Show("Changes Saved Successfully");
                 this.Close();
             }
+
             else if (button3WasClicked && dataGridView2.Rows.Count == 0)
             {
                 MessageBox.Show("Must have at least one associated part.");
