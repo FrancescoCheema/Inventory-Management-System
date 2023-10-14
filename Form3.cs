@@ -85,10 +85,13 @@ namespace Francesco_Cheema___Inventory
                     textBox5.BackColor = System.Drawing.Color.IndianRed;
                     tooltip1.SetToolTip(textBox5, "Machine ID Required");
                     tooltip1.BackColor = System.Drawing.Color.Gray;
+                    button1.Enabled = false;
                 }
                 else
                 {
                     textBox5.BackColor = System.Drawing.Color.White;
+                    button1.Enabled = true;
+                    tooltip1.Active = false;
                 }
             }
 
@@ -105,11 +108,10 @@ namespace Francesco_Cheema___Inventory
                 {
                     textBox5.BackColor = System.Drawing.Color.White;
                     button1.Enabled = true;
+                    tooltip1.Active = false;
                 }
             }
         }
-
-
 
         private void Form3_Load_1(object sender, EventArgs e)
         {
@@ -244,25 +246,88 @@ namespace Francesco_Cheema___Inventory
         {
             label7.Text = "Machine ID";
 
-            System.Windows.Forms.ToolTip toolTip1 = new System.Windows.Forms.ToolTip();
+            System.Windows.Forms.ToolTip tooltip1 = new System.Windows.Forms.ToolTip();
 
-            string s = textBox4.Text;
+            string s = textBox5.Text;
 
-            if (!s.All(Char.IsDigit))
+            if (radioButton1.Checked)
             {
-                textBox4.BackColor = System.Drawing.Color.IndianRed;
-                toolTip1.SetToolTip(textBox4, "Price is required");
-                toolTip1.ForeColor = System.Drawing.Color.Gray;
+
+                if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsDigit))
+                {
+                    textBox5.BackColor = System.Drawing.Color.IndianRed;
+                    tooltip1.SetToolTip(textBox5, "Machine ID Required");
+                    tooltip1.BackColor = System.Drawing.Color.Gray;
+                    button1.Enabled = false;
+                }
+                else
+                {
+                    textBox5.BackColor = System.Drawing.Color.White;
+                    button1.Enabled = true;
+                    tooltip1.Active = false;
+                }
             }
-            else
+
+            else if (radioButton2.Checked)
             {
-                textBox4.BackColor = System.Drawing.Color.White;
+                if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
+                {
+                    textBox5.BackColor = System.Drawing.Color.IndianRed;
+                    tooltip1.SetToolTip(textBox5, "Company Name Required");
+                    tooltip1.BackColor = System.Drawing.Color.Gray;
+                    button1.Enabled = false;
+                }
+                else
+                {
+                    textBox5.BackColor = System.Drawing.Color.White;
+                    button1.Enabled = true;
+                    tooltip1.Active = false;
+                }
+
             }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             label7.Text = "Company Name";
+            System.Windows.Forms.ToolTip tooltip1 = new System.Windows.Forms.ToolTip();
+
+            string s = textBox5.Text;
+
+            if (radioButton1.Checked)
+            {
+
+                if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsDigit))
+                {
+                    textBox5.BackColor = System.Drawing.Color.IndianRed;
+                    tooltip1.SetToolTip(textBox5, "Machine ID Required");
+                    tooltip1.BackColor = System.Drawing.Color.Gray;
+                    button1.Enabled = false;
+                }
+                else
+                {
+                    textBox5.BackColor = System.Drawing.Color.White;
+                    button1.Enabled = true;
+                    tooltip1.Active = false;
+                }
+            }
+
+            else if (radioButton2.Checked)
+            {
+                if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
+                {
+                    textBox5.BackColor = System.Drawing.Color.IndianRed;
+                    tooltip1.SetToolTip(textBox5, "Company Name Required");
+                    tooltip1.BackColor = System.Drawing.Color.Gray;
+                    button1.Enabled = false;
+                }
+                else
+                {
+                    textBox5.BackColor = System.Drawing.Color.White;
+                    button1.Enabled = true;
+                    tooltip1.Active = false;
+                }
+            }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

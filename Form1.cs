@@ -32,7 +32,7 @@ namespace Francesco_Cheema___Inventory
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            /* dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.AutoGenerateColumns = false;
 
             foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
@@ -43,7 +43,17 @@ namespace Francesco_Cheema___Inventory
             dataGridView1.Columns[1].Visible = true;
             dataGridView1.Columns[2].Visible = true;
             dataGridView1.Columns[3].Visible = true;
-            */
+
+            foreach (DataGridViewColumn column in dataGridView2.Columns)
+            {
+                column.Visible = false;
+            }
+
+            dataGridView2.Columns[0].Visible = true;
+            dataGridView2.Columns[1].Visible = true;
+            dataGridView2.Columns[2].Visible = true;
+            dataGridView2.Columns[3].Visible = true;
+
             dataGridView1.ClearSelection();
             dataGridView2.ClearSelection();
             
@@ -302,6 +312,10 @@ namespace Francesco_Cheema___Inventory
                 form.textBox3.Text = dataGridView2.CurrentRow.Cells[2].Value.ToString();
 
                 form.textBox4.Text = dataGridView2.CurrentRow.Cells[3].Value.ToString();
+
+                form.textBox5.Text = dataGridView2.CurrentRow.Cells[5].Value.ToString();
+
+                form.textBox6.Text = dataGridView2.CurrentRow.Cells[4].Value.ToString();
 
                 form.ShowDialog();
             }

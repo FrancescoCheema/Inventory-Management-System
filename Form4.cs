@@ -130,30 +130,36 @@ namespace Francesco_Cheema___Inventory
 
             if (radioButton1.Checked)
             {
-                if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsDigit))
-                {
-                    textBox5.BackColor = System.Drawing.Color.White;
-                    toolTip1.Active = false;
-                }
-                else
+
+                if (string.IsNullOrWhiteSpace(s) || s.All(Char.IsLetter))
                 {
                     textBox5.BackColor = System.Drawing.Color.IndianRed;
                     toolTip1.SetToolTip(textBox5, "Machine ID is required");
                     toolTip1.ForeColor = System.Drawing.Color.Gray;
-                }
-            }
-            else if (radioButton2.Checked)
-            {
-                if (string.IsNullOrWhiteSpace(s) || s.All(char.IsLetter))
-                {
-                    textBox5.BackColor = System.Drawing.Color.White;
-                    toolTip1.Active = false;
+                    button1.Enabled = false;
                 }
                 else
                 {
+                    textBox5.BackColor = System.Drawing.Color.White;
+                    button1.Enabled = true;
+                    toolTip1.Active = false;
+                }
+            }
+            if (radioButton2.Checked)
+            {
+
+                if (string.IsNullOrWhiteSpace(s) || !s.All(char.IsLetter))
+                {
                     textBox5.BackColor = System.Drawing.Color.IndianRed;
-                    toolTip1.SetToolTip(textBox5, "Company Name Required");
+                    toolTip1.SetToolTip(textBox5, "Company Name is required");
                     toolTip1.BackColor = System.Drawing.Color.Gray;
+                    button1.Enabled = false;
+                }
+                else
+                {
+                    textBox5.BackColor = System.Drawing.Color.White;
+                    button1.Enabled = true;
+                    toolTip1.Active = false;
                 }
             }
         }

@@ -21,12 +21,18 @@ namespace Francesco_Cheema___Inventory
         [DisplayName("Price")]
         public int Price { get; set; }
 
-        public Products(int productID, string name, int inventory, int price)
+        public int Max { get; set; }
+
+        public int Min { get; set; }
+
+        public Products(int productID, string name, int inventory, int price, int max, int min)
         {
             ProductID = productID;
             ProductName = name;
             Inventory = inventory;
             Price = price;
+            Max = max;
+            Min = min;
         }
 
 

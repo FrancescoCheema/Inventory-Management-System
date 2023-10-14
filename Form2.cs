@@ -27,6 +27,8 @@ namespace Francesco_Cheema___Inventory
             dataGridView2.Columns.Add("Price", "Price");
         }
 
+        private bool button3WasClicked = true;
+
         private void Form2_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Normal;
@@ -68,15 +70,17 @@ namespace Francesco_Cheema___Inventory
 
             string s = textBox3.Text;
 
-            if(string.IsNullOrEmpty(s) || s.All(char.IsLetter))
+            if (string.IsNullOrEmpty(s) || s.All(char.IsLetter))
             {
                 textBox3.BackColor = System.Drawing.Color.IndianRed;
                 tooltip1.ForeColor = System.Drawing.Color.Gray;
                 tooltip1.SetToolTip(textBox3, "Inventory is Required");
+                button3.Enabled = false;
             }
             else
             {
                 textBox3.BackColor = System.Drawing.Color.White;
+                button3.Enabled = true;
             }
         }
 
@@ -109,7 +113,7 @@ namespace Francesco_Cheema___Inventory
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         internal void SetDataSource(DataGridView dataGridView1)
@@ -124,7 +128,7 @@ namespace Francesco_Cheema___Inventory
 
         private void textBox7_TextChanged(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -174,10 +178,12 @@ namespace Francesco_Cheema___Inventory
                 textBox3.BackColor = System.Drawing.Color.IndianRed;
                 toolTip1.SetToolTip(textBox3, "Name is required");
                 toolTip1.ForeColor = System.Drawing.Color.Gray;
+                button3.Enabled = false;
             }
             else
             {
                 textBox3.BackColor = System.Drawing.Color.White;
+                button3.Enabled = true;
             }
         }
 
@@ -192,10 +198,12 @@ namespace Francesco_Cheema___Inventory
                 textBox4.BackColor = System.Drawing.Color.IndianRed;
                 toolTip1.SetToolTip(textBox4, "Name is required");
                 toolTip1.ForeColor = System.Drawing.Color.Gray;
+                button3.Enabled = false;
             }
             else
             {
                 textBox4.BackColor = System.Drawing.Color.White;
+                button3.Enabled = true;
             }
         }
 
@@ -210,10 +218,12 @@ namespace Francesco_Cheema___Inventory
                 textBox6.BackColor = System.Drawing.Color.IndianRed;
                 toolTip1.SetToolTip(textBox6, "Name is required");
                 toolTip1.ForeColor = System.Drawing.Color.Gray;
+                button3.Enabled = false;
             }
             else
             {
                 textBox6.BackColor = System.Drawing.Color.White;
+                button3.Enabled = true;
             }
         }
 
@@ -228,10 +238,44 @@ namespace Francesco_Cheema___Inventory
                 textBox5.BackColor = System.Drawing.Color.IndianRed;
                 toolTip1.SetToolTip(textBox5, "Name is required");
                 toolTip1.ForeColor = System.Drawing.Color.Gray;
+                button3.Enabled = false;
             }
             else
             {
                 textBox5.BackColor = System.Drawing.Color.White;
+                button3.Enabled = true;
+            }
+        }
+
+        private int SelectedRowIndex;
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form1 form = new Form1();
+
+            ProductsList.MyList[SelectedRowIndex].ProductName = textBox2.Text.ToString();
+            ProductsList.MyList[SelectedRowIndex].Inventory = Int32.Parse(textBox3.Text);
+            ProductsList.MyList[SelectedRowIndex].Price = Int32.Parse(textBox4.Text);
+            ProductsList.MyList[SelectedRowIndex].Max = Int32.Parse(textBox6.Text);
+            ProductsList.MyList[SelectedRowIndex].Min = Int32.Parse(textBox5.Text);
+
+            if (dataGridView2.Rows.Count > 0)
+            {
+                button3.Enabled = true;
+
+                Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+
+                if (form1 != null)
+                {
+                    form1.dataGridView1.Refresh();
+                }
+
+                MessageBox.Show("Changes Saved Successfully");
+                this.Close();
+            }
+            else if (button3WasClicked && dataGridView2.Rows.Count == 0)
+            {
+                MessageBox.Show("Must have at least one associated part.");
             }
         }
     }

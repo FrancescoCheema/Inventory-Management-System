@@ -19,9 +19,9 @@ namespace Francesco_Cheema___Inventory
             ListClass.MyList.Add(new Parts(2, "Transmission", 5, 1300, 12, 10, "4"));
             ListClass.MyList.Add(new Parts(3, "Tire", 8, 500, 14, 13, "6"));
 
-            ProductsList.MyList.Add(new Products(0, "Nissan Skyline GTT 1999" , 1, 45000));
-            ProductsList.MyList.Add(new Products(1, "Honda Civic SI 2023", 2, 37000));
-            ProductsList.MyList.Add(new Products(2, "Toyota GT86", 1, 40000));
+            ProductsList.MyList.Add(new Products(0, "Nissan Skyline GTT 1999" , 1, 45000, 15, 10));
+            ProductsList.MyList.Add(new Products(1, "Honda Civic SI 2023", 2, 37000, 25, 20));
+            ProductsList.MyList.Add(new Products(2, "Toyota GT86", 1, 40000, 12, 9));
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
