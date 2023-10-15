@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Francesco_Cheema___Inventory
@@ -18,13 +14,7 @@ namespace Francesco_Cheema___Inventory
 
             dataGridView1.DataSource = ListClass.MyList;
 
-            dataGridView2.Columns.Add("PartID", "Part ID");
-
-            dataGridView2.Columns.Add("PartName", "Part Name");
-
-            dataGridView2.Columns.Add("Inventory", "Inventory");
-
-            dataGridView2.Columns.Add("Price", "Price");
+            dataGridView2.DataSource = partList;
         }
 
         private bool button3WasClicked = true;
@@ -121,22 +111,37 @@ namespace Francesco_Cheema___Inventory
 
         }
 
+        BindingList<PartClass> partList = new BindingList<PartClass>(ListParts.MyList);
+
         private void button1_Click(object sender, EventArgs e)
         {
+
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                DataGridViewRow selectedrow = dataGridView1.SelectedRows[0];
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
 
-                DataGridViewRow newRow = new DataGridViewRow();
+                string cellValue = selectedRow.Cells[0].Value.ToString();
 
-                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = selectedrow.Cells[0].Value });
-                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = selectedrow.Cells[1].Value });
-                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = selectedrow.Cells[2].Value });
-                newRow.Cells.Add(new DataGridViewTextBoxCell { Value = selectedrow.Cells[3].Value });
+                try
+                {
+                    PartClass newPart = new PartClass(
+                        Int32.Parse(selectedRow.Cells[0].Value.ToString()),
+                        selectedRow.Cells[1].Value.ToString(),
+                        Int32.Parse(selectedRow.Cells[2].Value.ToString()),
+                        Int32.Parse(selectedRow.Cells[3].Value.ToString())
+                    );
 
-                dataGridView2.Rows.Add(newRow);
+                    partList.Add(newPart);
+                    dataGridView2.Refresh();
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+
             }
         }
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -308,12 +313,14 @@ namespace Francesco_Cheema___Inventory
             {
                 button3.Enabled = true;
 
-                Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
+                Form2 form2 = Application.OpenForms.OfType<Form2>().FirstOrDefault();
 
-                if (form1 != null)
+                if (form2 != null)
                 {
-                    form1.dataGridView1.Refresh();
+                    dataGridView2.Refresh();
                 }
+
+
                 MessageBox.Show("Changes Saved Successfully");
                 this.Close();
             }
@@ -321,6 +328,18 @@ namespace Francesco_Cheema___Inventory
             else if (button3WasClicked && dataGridView2.Rows.Count == 0)
             {
                 MessageBox.Show("Must have at least one associated part.");
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this row?", "Confirmation", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    dataGridView2.Rows.RemoveAt(dataGridView2.SelectedRows.Count - 1);
+                }
             }
         }
     }

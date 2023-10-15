@@ -320,5 +320,11 @@ namespace Francesco_Cheema___Inventory
                 form.ShowDialog();
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Form form5 = new Form5();
+            form5.ShowDialog();
+        }
     }
 }

@@ -103,5 +103,31 @@ namespace Francesco_Cheema___Inventory
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(dataGridView2.SelectedRows.Count > 0)
+            {
+                DialogResult dialogresult = MessageBox.Show("Are you sure you want to delete this part?", "Confirmation", MessageBoxButtons.YesNo);
+                if (dialogresult == DialogResult.Yes)
+                {
+                    DataGridViewRow SelectedRow = dataGridView2.SelectedRows[0];
+
+                    int partID = Convert.ToInt32(SelectedRow.Cells["PartID"].Value);
+                    Parts itemToRemove = ListClass.MyList.FirstOrDefault(item => item.PartID == partID);
+                    if (itemToRemove != null)
+                    {
+                        ListClass.MyList.Remove(itemToRemove);
+                    }
+
+                    dataGridView2.DataSource = null;
+                    dataGridView2.DataSource = ListClass.MyList;
+                }
+            }
+            else
+            {
+                MessageBox.Show("No row is selected to delete.");
+            }
+        }
     }
 }
