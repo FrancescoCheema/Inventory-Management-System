@@ -341,6 +341,10 @@ namespace Francesco_Cheema___Inventory
                     dataGridView2.Rows.RemoveAt(dataGridView2.SelectedRows.Count - 1);
                 }
             }
+            else
+            {
+                MessageBox.Show("No row is selected to delete.");
+            }
         }
     }
 }

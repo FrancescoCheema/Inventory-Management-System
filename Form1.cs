@@ -212,6 +212,11 @@ namespace Francesco_Cheema___Inventory
 
         private void textBox2_TextChanged_1(object sender, EventArgs e)
         {
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
             dataGridView2.ClearSelection();
             dataGridView2.DefaultCellStyle.SelectionBackColor = Color.FromArgb(241, 231, 64);
             bool found = false;
@@ -233,12 +238,6 @@ namespace Francesco_Cheema___Inventory
             {
                 MessageBox.Show("Nothing found.");
             }
-
-        }
-
-        private void button3_Click_1(object sender, EventArgs e)
-        {
-
         }
 
         private void deletebtn_Click(object sender, EventArgs e)
