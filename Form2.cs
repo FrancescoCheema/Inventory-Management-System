@@ -14,7 +14,11 @@ namespace Francesco_Cheema___Inventory
 
             dataGridView1.DataSource = ListClass.MyList;
 
+<<<<<<< HEAD
             dataGridView2.DataSource = ProductsList.MyList;
+=======
+            dataGridView2.DataSource = partList;
+>>>>>>> 76d61a3183c6c6183a604390bf5771f54df92bcd
         }
 
         private bool button3WasClicked = true;
@@ -41,7 +45,11 @@ namespace Francesco_Cheema___Inventory
             {
                 if (min > max && button3WasClicked)
                 {
+<<<<<<< HEAD
                     MessageBox.Show("Your minimum exceeds your maximum.");
+=======
+                    MessageBox.Show("Your minimum exceeds your maximu.");
+>>>>>>> 76d61a3183c6c6183a604390bf5771f54df92bcd
                     button3.Enabled = false;
                 }
                 else
@@ -248,7 +256,11 @@ namespace Francesco_Cheema___Inventory
             if (string.IsNullOrEmpty(s) || s.All(Char.IsLetter))
             {
                 textBox6.BackColor = System.Drawing.Color.IndianRed;
+<<<<<<< HEAD
                 toolTip1.SetToolTip(textBox6, "Maximum is required");
+=======
+                toolTip1.SetToolTip(textBox6, "Name is required");
+>>>>>>> 76d61a3183c6c6183a604390bf5771f54df92bcd
                 toolTip1.ForeColor = System.Drawing.Color.Gray;
                 button3.Enabled = false;
             }
@@ -268,7 +280,11 @@ namespace Francesco_Cheema___Inventory
             if (string.IsNullOrEmpty(s) || s.All(Char.IsLetter))
             {
                 textBox5.BackColor = System.Drawing.Color.IndianRed;
+<<<<<<< HEAD
                 toolTip1.SetToolTip(textBox5, "Minimum is required");
+=======
+                toolTip1.SetToolTip(textBox5, "Name is required");
+>>>>>>> 76d61a3183c6c6183a604390bf5771f54df92bcd
                 toolTip1.ForeColor = System.Drawing.Color.Gray;
                 button3.Enabled = false;
             }
@@ -283,6 +299,7 @@ namespace Francesco_Cheema___Inventory
 
         private void button3_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
 
             if (SelectedRowIndex >= 0 && SelectedRowIndex < ProductsList.MyList.Count)
             {
@@ -362,6 +379,54 @@ namespace Francesco_Cheema___Inventory
                     button1.Enabled = false;
                 }
             }
+=======
+            Form1 form = new Form1();
+
+            ProductsList.MyList[SelectedRowIndex].ProductName = textBox2.Text.ToString();
+            ProductsList.MyList[SelectedRowIndex].Inventory = Int32.Parse(textBox3.Text);
+            ProductsList.MyList[SelectedRowIndex].Price = Int32.Parse(textBox4.Text);
+            ProductsList.MyList[SelectedRowIndex].Max = Int32.Parse(textBox6.Text);
+            ProductsList.MyList[SelectedRowIndex].Min = Int32.Parse(textBox5.Text);
+
+            string maxText = textBox6.Text;
+            string minText = textBox5.Text;
+            int max = 0;
+            int min = 0;
+
+            if (ValidateNumericInput(maxText, out max) &&
+                (ValidateNumericInput(minText, out min)))
+            {
+                if (min > max && button3WasClicked)
+                {
+                    MessageBox.Show("Your minimum exceeds your maximum.");
+                    button3.Enabled = false;
+                }
+                else
+                {
+                    button3.Enabled = true;
+                }
+            }
+            if (dataGridView2.Rows.Count > 0)
+            {
+                button3.Enabled = true;
+
+                Form2 form2 = Application.OpenForms.OfType<Form2>().FirstOrDefault();
+
+                if (form2 != null)
+                {
+                    dataGridView2.Refresh();
+                }
+
+
+                MessageBox.Show("Changes Saved Successfully");
+                this.Close();
+            }
+
+            else if (button3WasClicked && dataGridView2.Rows.Count == 0)
+            {
+                MessageBox.Show("Must have at least one associated part.");
+            }
+>>>>>>> 76d61a3183c6c6183a604390bf5771f54df92bcd
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -379,10 +444,13 @@ namespace Francesco_Cheema___Inventory
                 MessageBox.Show("No row is selected to delete.");
             }
         }
+<<<<<<< HEAD
 
         private void button6_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+=======
+>>>>>>> 76d61a3183c6c6183a604390bf5771f54df92bcd
     }
 }
