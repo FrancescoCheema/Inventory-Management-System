@@ -67,6 +67,7 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 62;
             this.dataGridView2.RowTemplate.Height = 28;
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView2.Size = new System.Drawing.Size(632, 305);
             this.dataGridView2.TabIndex = 2;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
@@ -266,7 +267,12 @@
         public System.Windows.Forms.DataGridView dataGridView2;
         public System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label IMS;
-        private System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox textBox2;
+        public System.Windows.Forms.TextBox textBox3;
+        public System.Windows.Forms.TextBox textBox4;
+        public System.Windows.Forms.TextBox textBox5;
+        public System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label PartsLabel;
         private System.Windows.Forms.Label ProductsLabel;
         private System.Windows.Forms.Button addbtn;
@@ -276,7 +282,6 @@
         private System.Windows.Forms.Button deletebtn2;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button exitbtn;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button3;
     }
 }

@@ -91,7 +91,7 @@ namespace Francesco_Cheema___Inventory
 
             string s = textBox4.Text;
 
-            if (string.IsNullOrEmpty(s) || s.All(Char.IsLetter))
+            if (string.IsNullOrEmpty(s) || s.All(Char.IsLetter) || !int.TryParse(s, out int intResult) && !decimal.TryParse(s, out decimal decimalResult))
             {
                 textBox4.BackColor = System.Drawing.Color.IndianRed;
                 toolTip1.SetToolTip(textBox4, "Price is required");
@@ -167,9 +167,36 @@ namespace Francesco_Cheema___Inventory
 
         private bool button1WasClicked = true;
 
+        private bool ValidateNumericInput(string text, out decimal result)
+        {
+            if (decimal.TryParse(text, out result))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private bool ValidateNumericInput(string text, out int result)
         {
-            return int.TryParse(text, out result);
+            if (int.TryParse(text, out result))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public class ConcretePart : Part
+        {
+            public ConcretePart(int PartID, string name, int inventory, decimal price, int min, int max, string idOrCompany)
+                : base(PartID, name, inventory, price, min, max, idOrCompany)
+            {
+            }
         }
 
         private int lastPartID = 3;
@@ -181,7 +208,7 @@ namespace Francesco_Cheema___Inventory
             string priceText = textBox4.Text;
             string textBox6Text = textBox6.Text;
             string textBox7Text = textBox7.Text;
-            int price = 0;
+            decimal price = 0;
             int inventory = 0;
             int max = 0;
             int value7 = 0;
@@ -203,7 +230,7 @@ namespace Francesco_Cheema___Inventory
                     int maxPartID = ListClass.MyList.Max(p => p.PartID);
                     int nextPartID = maxPartID + 1;
 
-                    Parts newPart = new Parts(nextPartID, partName, inventory, price, value7, max , idorcompany);
+                    ConcretePart newPart = new ConcretePart(nextPartID, Name, inventory, price, value7, max, idorcompany);
                     ListClass.MyList.Add(newPart);
 
                     Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
@@ -291,8 +318,10 @@ namespace Francesco_Cheema___Inventory
             string priceText = textBox4.Text;
             string textBox6Text = textBox6.Text;
             string textBox7Text = textBox7.Text;
-            int price = 0;
+            decimal price = 0;
             int inventory = 0;
+            int max = 0;
+            decimal value7 = 0;
 
             bool allFieldsEntered = !string.IsNullOrEmpty(partName) &&
                                     !string.IsNullOrEmpty(inventoryText) &&
@@ -303,9 +332,9 @@ namespace Francesco_Cheema___Inventory
             if (allFieldsEntered)
             {
                 if (ValidateNumericInput(inventoryText, out inventory) &&
-                    ValidateNumericInput(priceText, out price) &&
-                    ValidateNumericInput(textBox6Text, out int value6) &&
-                    ValidateNumericInput(textBox7Text, out int value7))
+                    ValidateNumericInput(priceText, out decimal decimalPrice) &&
+                    ValidateNumericInput(textBox6Text, out max) &&
+                    ValidateNumericInput(textBox7Text, out value7))
                 {
 
                     if (radioButton1.Checked)

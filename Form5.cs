@@ -248,6 +248,7 @@ namespace Francesco_Cheema___Inventory
                 int nextPartID = maxProductID + 1;
 
                 Products newProduct = new Products(nextPartID, ProductName, inventory, price, min, max);
+
                 ProductsList.MyList.Add(newProduct);
 
                 Form1 form1 = Application.OpenForms.OfType<Form1>().FirstOrDefault();
@@ -294,14 +295,11 @@ namespace Francesco_Cheema___Inventory
             
             }
         }
-<<<<<<< HEAD
 
         private void button4_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-=======
->>>>>>> 76d61a3183c6c6183a604390bf5771f54df92bcd
     }
     
 }

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Francesco_Cheema___Inventory
 {
-    static class ProductsList
+    public static class ProductsList
     {
         public static List<Products> MyList = new List<Products>();
 
-        public static void addOne(Products per)
+        public static void AddOne(Products product)
         {
-            MyList.Add(per);
+            MyList.Add(product);
         }
     }
 }

@@ -7,35 +7,53 @@ using System.Threading.Tasks;
 
 namespace Francesco_Cheema___Inventory
 {
-    class Products
+    public class Products
     {
-        [DisplayName("Product ID")]
+        public BindingList<Part> AssociatedParts = new BindingList<Part>();
+
         public int ProductID { get; set; }
-
-        [DisplayName("Car Name")]
-        public string ProductName { get; set; }
-
-        [DisplayName("Inventory")]
-        public int Inventory {  get; set; }
-
-        [DisplayName("Price")]
-        public int Price { get; set; }
-
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public int InStock { get; set; }
+        public int Min { get; set; }
         public int Max { get; set; }
 
-        public int Min { get; set; }
-
-        public Products(int productID, string name, int inventory, int price, int max, int min)
+        public Products(int productId, string name, decimal price, int inStock, int min, int max)
         {
-            ProductID = productID;
-            ProductName = name;
-            Inventory = inventory;
+            ProductID = productId;
+            Name = name;
             Price = price;
-            Max = max;
+            InStock = inStock;
             Min = min;
+            Max = max;
         }
 
+        public void addAssociatedPart(Part part)
+        {
+            AssociatedParts.Add(part);
+        }
 
+        public bool removeAssociatedPart(int partId)
+        {
+            foreach (Part p in AssociatedParts)
+            {
+                if (p.PartID == partId)
+                {
+                    AssociatedParts.Remove(p);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Part lookupAssociatedPart(int partId)
+        {
+            foreach (Part p in AssociatedParts)
+            {
+                if (p.PartID == partId) { return p; }
+            }
+            return null;
+        }
 
     }
 }

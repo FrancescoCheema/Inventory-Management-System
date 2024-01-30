@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Francesco_Cheema___Inventory
 {
-    class PartClass
+    public class PartClass
     {
         [DisplayName("Part ID")]
         public int PartID { get; set; }
@@ -19,9 +19,9 @@ namespace Francesco_Cheema___Inventory
         public int Inventory { get; set; }
 
         [DisplayName("Price")]
-        public int Price { get; set; }
+        public decimal Price { get; set; }
 
-        public PartClass(int PartID, string Part, int inventory, int a)
+        public PartClass(int PartID, string Part, int inventory, decimal a)
         {
             PartID = PartID;
             PartName = Part;

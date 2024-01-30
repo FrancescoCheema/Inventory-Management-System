@@ -8,9 +8,9 @@ namespace Francesco_Cheema___Inventory
 {
     static class ListClass
     {
-        public static List<Parts> MyList = new List<Parts>();
+        public static List<Part> MyList = new List<Part>();
 
-        public static void addOne(Parts per)
+        public static void addOne(Part per)
         {
             MyList.Add(per);
         }
